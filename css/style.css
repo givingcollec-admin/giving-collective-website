@@ -68,3 +68,23 @@ main.container > section {
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
+
+/* Core Values Section */
+.value-card {
+    background-color: var(--light-bg);
+    padding: 2rem;
+    border-radius: 10px;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.value-card h4 {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
