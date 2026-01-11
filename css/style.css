@@ -18,6 +18,11 @@ body {
     font-weight: bold;
 }
 
+.navbar {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
 .btn-primary {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
