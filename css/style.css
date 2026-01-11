@@ -89,6 +89,10 @@ main.container > section {
     margin-bottom: 1rem;
 }
 
+p.lead {
+    font-size: 1.7rem;
+}
+
 .co-founder-blurb {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
 }
