@@ -88,3 +88,7 @@ main.container > section {
     font-weight: 600;
     margin-bottom: 1rem;
 }
+
+.co-founder-blurb {
+    font-size: 1.1rem;
+}
