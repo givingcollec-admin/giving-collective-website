@@ -25,6 +25,7 @@ body {
 
 .logo-container img {
     mix-blend-mode: multiply;
+    height: 60px;
 }
 
 .btn-primary {
