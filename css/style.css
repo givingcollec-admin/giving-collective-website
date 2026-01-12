@@ -79,11 +79,6 @@ main.container > section {
     padding-bottom: 2rem;
 }
 
-#core-values {
-    background-color: #e7f7fe; /* A light blue */
-    padding: 3rem 0; /* Add some vertical padding to the section */
-}
-
 /* Core Values Section */
 .value-card {
     background-color: var(--light-bg);
