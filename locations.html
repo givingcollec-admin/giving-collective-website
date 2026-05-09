@@ -246,7 +246,7 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-// ── Data ────────────────────────────────────────────────────────────────────
+// ── Data ─────────────────────────────────────────────────────────────────────
 const drives = [
   {
     id: 'linden',
@@ -274,15 +274,16 @@ const drives = [
   }
 ];
 
-// ── State ────────────────────────────────────────────────────────────────────
+// ── State ─────────────────────────────────────────────────────────────────────
 let map = null;
-let markers = [];
+let markerData = []; // { marker, driveId, locIdx, lat, lng }
 let userMarker = null;
 let userLat = null, userLng = null;
-let selectedDrive = null;
+let focusedDrive = null; // which drive card is highlighted
 let currentTab = 'active';
+let closestKey = null; // "driveId-locIdx"
 
-// ── Haversine distance (km) ──────────────────────────────────────────────────
+// ── Helpers ───────────────────────────────────────────────────────────────────
 function haversine(lat1, lng1, lat2, lng2) {
   const R = 6371;
   const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -295,62 +296,32 @@ function fmtDist(km) {
   return mi < 10 ? mi.toFixed(1) + ' mi' : Math.round(mi) + ' mi';
 }
 
-// ── Render drive list ────────────────────────────────────────────────────────
-function renderList() {
-  const list = document.getElementById('drive-list');
-  list.innerHTML = '';
-  const filtered = drives.filter(d => d.status === currentTab);
-  filtered.forEach(drive => {
-    const card = document.createElement('div');
-    card.className = 'drive-card' + (selectedDrive?.id === drive.id ? ' selected' : '');
-    card.onclick = () => selectDrive(drive);
-
-    const locs = drive.locations.map((loc, i) => {
-      const dist = (userLat !== null) ? haversine(userLat, userLng, loc.lat, loc.lng) : null;
-      return { ...loc, dist, idx: i };
-    });
-    if (userLat !== null) locs.sort((a, b) => a.dist - b.dist);
-
-    const locItems = selectedDrive?.id === drive.id
-      ? `<div class="location-list">
-          ${locs.map(loc => `
-            <div class="loc-item" onclick="event.stopPropagation();focusMarker(${loc.idx})">
-              <div class="loc-pin">${loc.idx + 1}</div>
-              <div class="loc-info">
-                <div class="loc-name">${loc.name}</div>
-                <div class="loc-addr">${loc.address}</div>
-              </div>
-              ${loc.dist !== null ? `<div class="loc-dist">${fmtDist(loc.dist)}</div>` : ''}
-            </div>`).join('')}
-        </div>`
-      : '';
-
-    card.innerHTML = `
-      <div class="drive-card-header">
-        <div class="drive-name">${drive.name}</div>
-        <span class="drive-badge ${drive.status === 'active' ? 'badge-active' : 'badge-past'}">
-          ${drive.status === 'active' ? 'Active' : 'Past'}
-        </span>
-      </div>
-      <div class="drive-meta">${drive.locations.length} drop-off location${drive.locations.length !== 1 ? 's' : ''}</div>
-      ${locItems}`;
-    list.appendChild(card);
+// ── Build a marker icon ───────────────────────────────────────────────────────
+function makeIcon(label, isClosest) {
+  const bg    = isClosest ? '#f4c842' : '#2d6a4f';
+  const color = isClosest ? '#111'    : '#fff';
+  const size  = isClosest ? 34 : 28;
+  const ring  = isClosest ? `box-shadow:0 0 0 3px #f4c842,0 2px 12px rgba(0,0,0,0.3);` : `box-shadow:0 2px 8px rgba(0,0,0,0.25);`;
+  return L.divIcon({
+    className: '',
+    html: `<div style="
+      width:${size}px;height:${size}px;border-radius:50%;
+      background:${bg};color:${color};
+      font-family:'Figtree',sans-serif;font-size:11px;font-weight:700;
+      display:flex;align-items:center;justify-content:center;
+      border:2.5px solid #fff;${ring}
+    ">${label}</div>`,
+    iconSize: [size, size],
+    iconAnchor: [size/2, size/2],
+    popupAnchor: [0, -size/2 - 4]
   });
 }
 
-// ── Select a drive ───────────────────────────────────────────────────────────
-function selectDrive(drive) {
-  selectedDrive = drive;
-  renderList();
-  loadMap(drive);
-}
-
-// ── Load / update map ────────────────────────────────────────────────────────
-function loadMap(drive) {
+// ── Load all active drives onto map ──────────────────────────────────────────
+function loadActiveMap() {
   document.getElementById('map-placeholder').style.display = 'none';
   document.getElementById('map').style.display = 'block';
-  document.getElementById('map-title').innerHTML =
-    `<span>${drive.name}</span> — Drop-off Locations`;
+  document.getElementById('map-title').innerHTML = 'All <span>Active</span> Drop-off Locations';
 
   if (!map) {
     map = L.map('map');
@@ -359,86 +330,211 @@ function loadMap(drive) {
     }).addTo(map);
   }
 
-  // Clear old markers
-  markers.forEach(m => map.removeLayer(m));
-  markers = [];
+  markerData.forEach(md => map.removeLayer(md.marker));
+  markerData = [];
 
   const bounds = [];
+  let globalIdx = 1;
 
-  drive.locations.forEach((loc, i) => {
-    const icon = L.divIcon({
-      className: '',
-      html: `<div style="
-        width:30px;height:30px;border-radius:50%;
-        background:#2d6a4f;color:#fff;
-        font-family:'Figtree',sans-serif;font-size:12px;font-weight:700;
-        display:flex;align-items:center;justify-content:center;
-        border:2.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.25);
-      ">${i+1}</div>`,
-      iconSize: [30, 30],
-      iconAnchor: [15, 15],
-      popupAnchor: [0, -18]
+  drives.filter(d => d.status === 'active').forEach(drive => {
+    drive.locations.forEach((loc, locIdx) => {
+      const key = `${drive.id}-${locIdx}`;
+      const isClosest = key === closestKey;
+      const marker = L.marker([loc.lat, loc.lng], { icon: makeIcon(globalIdx, isClosest) })
+        .addTo(map)
+        .bindPopup(`
+          ${isClosest ? '<div style="font-size:11px;font-weight:700;color:#b5830a;margin-bottom:4px">★ Closest to you</div>' : ''}
+          <strong>${loc.name}</strong><br>
+          <span style="font-size:12px;color:#555">${loc.address}</span>
+        `);
+      markerData.push({ marker, driveId: drive.id, locIdx, lat: loc.lat, lng: loc.lng, globalIdx });
+      bounds.push([loc.lat, loc.lng]);
+      globalIdx++;
     });
-    const marker = L.marker([loc.lat, loc.lng], { icon })
-      .addTo(map)
-      .bindPopup(`<strong>${loc.name}</strong><br><span style="font-size:12px;color:#555">${loc.address}</span>`);
-    markers.push(marker);
-    bounds.push([loc.lat, loc.lng]);
   });
 
   if (userLat !== null) {
-    bounds.push([userLat, userLng]);
     if (userMarker) map.removeLayer(userMarker);
     userMarker = L.circleMarker([userLat, userLng], {
-      radius: 8, fillColor: '#f4c842', color: '#fff',
-      weight: 2.5, fillOpacity: 1
+      radius: 9, fillColor: '#3b82f6', color: '#fff', weight: 2.5, fillOpacity: 1
     }).addTo(map).bindPopup('<strong>You are here</strong>');
+    bounds.push([userLat, userLng]);
+
+    // Open popup on closest marker
+    if (closestKey) {
+      const md = markerData.find(m => `${m.driveId}-${m.locIdx}` === closestKey);
+      if (md) setTimeout(() => md.marker.openPopup(), 400);
+    }
   }
 
-  map.fitBounds(bounds, { padding: [40, 40] });
+  if (bounds.length) map.fitBounds(bounds, { padding: [50, 50] });
 }
 
-// ── Focus on a single marker ─────────────────────────────────────────────────
-function focusMarker(idx) {
-  if (!markers[idx]) return;
-  map.setView(markers[idx].getLatLng(), 15);
-  markers[idx].openPopup();
+// ── Load past drive onto map (click-to-select) ────────────────────────────────
+function loadPastMap(drive) {
+  document.getElementById('map-placeholder').style.display = 'none';
+  document.getElementById('map').style.display = 'block';
+  document.getElementById('map-title').innerHTML = `<span>${drive.name}</span> — Past Drive`;
+
+  if (!map) {
+    map = L.map('map');
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+    }).addTo(map);
+  }
+
+  markerData.forEach(md => map.removeLayer(md.marker));
+  markerData = [];
+  const bounds = [];
+
+  drive.locations.forEach((loc, locIdx) => {
+    const marker = L.marker([loc.lat, loc.lng], { icon: makeIcon(locIdx + 1, false) })
+      .addTo(map)
+      .bindPopup(`<strong>${loc.name}</strong><br><span style="font-size:12px;color:#555">${loc.address}</span>`);
+    markerData.push({ marker, driveId: drive.id, locIdx, lat: loc.lat, lng: loc.lng, globalIdx: locIdx + 1 });
+    bounds.push([loc.lat, loc.lng]);
+  });
+
+  if (bounds.length) map.fitBounds(bounds, { padding: [50, 50] });
 }
 
-// ── Geolocation ──────────────────────────────────────────────────────────────
+// ── Find closest location across all active drives ────────────────────────────
+function updateClosest() {
+  if (userLat === null) return;
+  let minDist = Infinity;
+  closestKey = null;
+  drives.filter(d => d.status === 'active').forEach(drive => {
+    drive.locations.forEach((loc, locIdx) => {
+      const d = haversine(userLat, userLng, loc.lat, loc.lng);
+      if (d < minDist) { minDist = d; closestKey = `${drive.id}-${locIdx}`; }
+    });
+  });
+}
+
+// ── Render left panel ─────────────────────────────────────────────────────────
+function renderList() {
+  const list = document.getElementById('drive-list');
+  list.innerHTML = '';
+  const filtered = drives.filter(d => d.status === currentTab);
+
+  filtered.forEach(drive => {
+    const card = document.createElement('div');
+    const isActive = drive.status === 'active';
+    const isFocused = focusedDrive?.id === drive.id;
+    card.className = 'drive-card' + (isFocused ? ' selected' : '');
+    card.onclick = () => {
+      focusedDrive = drive;
+      if (isActive) {
+        // Zoom map to this drive's locations
+        const driveBounds = drive.locations.map(l => [l.lat, l.lng]);
+        if (map && driveBounds.length) map.fitBounds(driveBounds, { padding: [60, 60] });
+      } else {
+        loadPastMap(drive);
+      }
+      renderList();
+    };
+
+    // Build location items
+    const locs = drive.locations.map((loc, i) => {
+      const dist = userLat !== null ? haversine(userLat, userLng, loc.lat, loc.lng) : null;
+      const key = `${drive.id}-${i}`;
+      const md = markerData.find(m => m.driveId === drive.id && m.locIdx === i);
+      const num = md ? md.globalIdx : i + 1;
+      return { ...loc, dist, idx: i, key, num };
+    });
+    if (userLat !== null) locs.sort((a, b) => a.dist - b.dist);
+
+    const showLocs = isActive || isFocused;
+
+    const locItems = showLocs ? `
+      <div class="location-list">
+        ${locs.map((loc, rank) => {
+          const isClosest = loc.key === closestKey;
+          return `
+          <div class="loc-item${isClosest ? ' highlighted' : ''}"
+               onclick="event.stopPropagation();focusMarker('${drive.id}',${loc.idx})">
+            <div class="loc-pin" style="${isClosest ? 'background:#f4c842;color:#111' : ''}">${loc.num}</div>
+            <div class="loc-info">
+              <div class="loc-name">
+                ${loc.name}
+                ${isClosest ? '<span style="font-size:0.65rem;font-weight:700;color:#b5830a;margin-left:4px">★ Closest</span>' : ''}
+              </div>
+              <div class="loc-addr">${loc.address}</div>
+            </div>
+            ${loc.dist !== null ? `<div class="loc-dist">${fmtDist(loc.dist)}</div>` : ''}
+          </div>`;
+        }).join('')}
+      </div>` : '';
+
+    card.innerHTML = `
+      <div class="drive-card-header">
+        <div class="drive-name">${drive.name}</div>
+        <span class="drive-badge ${isActive ? 'badge-active' : 'badge-past'}">
+          ${isActive ? 'Active' : 'Past'}
+        </span>
+      </div>
+      <div class="drive-meta">${drive.locations.length} drop-off location${drive.locations.length !== 1 ? 's' : ''}</div>
+      ${locItems}`;
+    list.appendChild(card);
+  });
+}
+
+// ── Focus a marker on the map ─────────────────────────────────────────────────
+function focusMarker(driveId, locIdx) {
+  const md = markerData.find(m => m.driveId === driveId && m.locIdx === locIdx);
+  if (!md) return;
+  map.setView(md.marker.getLatLng(), 15);
+  md.marker.openPopup();
+}
+
+// ── "Near Me" button (manual fallback) ────────────────────────────────────────
 function locateMe() {
-  if (!navigator.geolocation) return alert('Geolocation not supported by your browser.');
+  requestLocation(true);
+}
+
+function requestLocation(showError) {
+  if (!navigator.geolocation) {
+    if (showError) alert('Geolocation is not supported by your browser.');
+    return;
+  }
   const btn = document.querySelector('.locate-btn');
   btn.textContent = 'Locating…';
   navigator.geolocation.getCurrentPosition(pos => {
     userLat = pos.coords.latitude;
     userLng = pos.coords.longitude;
     btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg> Near Me ✓`;
+    updateClosest();
+    if (currentTab === 'active') loadActiveMap();
     renderList();
-    if (selectedDrive) loadMap(selectedDrive);
   }, () => {
-    btn.textContent = 'Near Me';
-    alert('Could not get your location. Please allow location access and try again.');
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg> Near Me`;
+    if (showError) alert('Could not get your location. Please allow location access and try again.');
   });
 }
 
-// ── Tab switching ─────────────────────────────────────────────────────────────
+// ── Tab switching ──────────────────────────────────────────────────────────────
 function showTab(tab, btn) {
   currentTab = tab;
-  selectedDrive = null;
+  focusedDrive = null;
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  document.getElementById('map-placeholder').style.display = 'flex';
-  document.getElementById('map').style.display = 'none';
-  document.getElementById('map-title').textContent = 'Select a drive to see locations';
+  if (tab === 'active') {
+    loadActiveMap();
+  } else {
+    markerData.forEach(md => map && map.removeLayer(md.marker));
+    markerData = [];
+    document.getElementById('map-placeholder').style.display = 'flex';
+    document.getElementById('map').style.display = 'none';
+    document.getElementById('map-title').textContent = 'Select a drive to see locations';
+  }
   renderList();
 }
 
-// ── Init ──────────────────────────────────────────────────────────────────────
+// ── Init ───────────────────────────────────────────────────────────────────────
+loadActiveMap();
 renderList();
-// Auto-select the first active drive
-const firstActive = drives.find(d => d.status === 'active');
-if (firstActive) selectDrive(firstActive);
+// Auto-request location silently on load
+requestLocation(false);
 </script>
 </body>
 </html>
