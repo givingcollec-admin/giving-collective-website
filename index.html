@@ -30,7 +30,27 @@
   </ul>
 </nav>
 
-<!-- HERO -->
+<!-- CAROUSEL -->
+<div class="carousel-wrap">
+  <div class="carousel-track" id="carouselTrack">
+    <div class="carousel-slide" style="background-image:url('images/image5.jpg')"></div>
+    <div class="carousel-slide" style="background-image:url('images/image6.jpg')"></div>
+    <div class="carousel-slide" style="background-image:url('images/image7.jpg')"></div>
+    <div class="carousel-slide" style="background-image:url('images/image8.jpg')"></div>
+    <div class="carousel-slide" style="background-image:url('images/image1.jpg')"></div>
+  </div>
+  <!-- blue gradient overlay -->
+  <div class="carousel-overlay"></div>
+  <!-- watermark text -->
+  <div class="carousel-text">
+    <div class="carousel-badge">Student-Run · 501(c)(3) Nonprofit</div>
+    <div class="carousel-title">Giving Collective</div>
+  </div>
+  <!-- dot indicators -->
+  <div class="carousel-dots" id="carouselDots"></div>
+</div>
+
+<!-- HERO (text + stats below carousel) -->
 <section class="hero">
   <div class="hero-content">
     <div class="hero-badge fade-up">Student-Run · 501(c)(3) Certified Nonprofit</div>
@@ -215,6 +235,49 @@
 </footer>
 
 <script>
+// ── Carousel ──────────────────────────────────────────────────────────────────
+(function() {
+  const track  = document.getElementById('carouselTrack');
+  const dotsEl = document.getElementById('carouselDots');
+  const slides = track.querySelectorAll('.carousel-slide');
+  const total  = slides.length;
+  let current  = 0;
+  let timer;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `Slide ${i + 1}`);
+    dot.onclick = () => goTo(i);
+    dotsEl.appendChild(dot);
+  });
+
+  function goTo(n) {
+    current = (n + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dotsEl.querySelectorAll('.carousel-dot').forEach((d, i) =>
+      d.classList.toggle('active', i === current)
+    );
+  }
+
+  function next() { goTo(current + 1); }
+
+  function startTimer() { timer = setInterval(next, 3000); }
+  function resetTimer()  { clearInterval(timer); startTimer(); }
+
+  // Pause on hover
+  const wrap = track.closest('.carousel-wrap');
+  wrap.addEventListener('mouseenter', () => clearInterval(timer));
+  wrap.addEventListener('mouseleave', startTimer);
+
+  // Dot clicks already reset via onclick → goTo, restart timer
+  dotsEl.addEventListener('click', resetTimer);
+
+  startTimer();
+})();
+
+// ── Scroll animations ─────────────────────────────────────────────────────────
 const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
