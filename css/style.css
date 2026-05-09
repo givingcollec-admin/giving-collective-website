@@ -100,9 +100,29 @@ main.container > section {
 }
 
 p.lead {
+
     font-size: 1.6rem;
+
 }
 
+
+
 .co-founder-blurb {
+
     font-size: 1.3rem;
+
+}
+
+
+
+/* Testimonial Carousel Controls */
+
+#testimonial-carousel .carousel-control-prev-icon,
+
+#testimonial-carousel .carousel-control-next-icon {
+
+    background-color: #000;
+
+    border-radius: 50%;
+
 }
