@@ -185,32 +185,62 @@
     <h2>What the community <em>says</em></h2>
     <p>Real words from the schools, families, and partners we've had the privilege of serving.</p>
   </div>
-  <div class="testi-grid">
-    <div class="testi wide">
-      <span class="quote-mark">"</span>
-      <blockquote>On February 13, 2026, we were honored to welcome the Giving Collective to our school. Thanks to their incredible donation of clothing, coats, scarves, hats, gloves, and toys, 278 students in grades K–4 were able to choose 2–3 items to take home. The smiles on our students' faces said it all — it truly felt like a special shopping day just for them.</blockquote>
-      <cite>Senator Frank Lautenberg Full-Service Community School 6</cite>
+  <div class="testi-carousel-wrap">
+    <div class="testi-carousel-track" id="testiTrack">
+      <div class="testi-slide">
+        <div class="testi-slide-text">
+          <span class="quote-mark">"</span>
+          <blockquote>On February 13, 2026, we were honored to welcome the Giving Collective to our school. Thanks to their incredible donation of clothing, coats, scarves, hats, gloves, and toys, 278 students in grades K–4 were able to choose 2–3 items to take home. The smiles on our students' faces said it all — it truly felt like a special shopping day just for them.</blockquote>
+          <cite>Senator Frank Lautenberg Full-Service Community School 6</cite>
+        </div>
+        <div class="testi-slide-img">
+          <img src="images/image2.jpg" alt="Lautenberg School drive">
+        </div>
+      </div>
+      <div class="testi-slide">
+        <div class="testi-slide-text">
+          <span class="quote-mark">"</span>
+          <blockquote>Sania visited Queen City Academy Charter School for a book donation drive benefiting students in grades K–5. Her talk with the third-grade students was not just inspiring but also very motivating. It was a pleasure to have her lead this drive with such ease and in such an organized manner. I would love to do it again whenever possible.</blockquote>
+          <cite>Queen City Academy Charter School</cite>
+        </div>
+        <div class="testi-slide-img">
+          <img src="images/image3.jpg" alt="Queen City Academy students">
+        </div>
+      </div>
+      <div class="testi-slide">
+        <div class="testi-slide-text">
+          <span class="quote-mark">"</span>
+          <blockquote>I had an amazing time making sandwiches for the Giving Collective, knowing I was helping the community get the right nutrition for their day.</blockquote>
+          <cite>Hudson, Volunteer</cite>
+        </div>
+        <div class="testi-slide-img">
+          <img src="images/image6.jpg" alt="Volunteers">
+        </div>
+      </div>
+      <div class="testi-slide">
+        <div class="testi-slide-text">
+          <span class="quote-mark">"</span>
+          <blockquote>Zaara, Sania, and Veer are doing incredible work! It is so inspiring to see such young leaders helping others and bringing people together.</blockquote>
+          <cite>Perlei Salon</cite>
+        </div>
+        <div class="testi-slide-img">
+          <img src="images/image4.jpg" alt="Community drive">
+        </div>
+      </div>
+      <div class="testi-slide">
+        <div class="testi-slide-text">
+          <span class="quote-mark">"</span>
+          <blockquote>So proud to back the Giving Collective! Their commitment to helping others is contagious. Keep up the amazing work!</blockquote>
+          <cite>Kareem · Bagels &amp; Beyond Cafe</cite>
+        </div>
+        <div class="testi-slide-img testi-slide-img--logo">
+          <img src="images/logo1.b7150fec.webp" alt="Bagels and Beyond Cafe">
+        </div>
+      </div>
     </div>
-    <div class="testi tall">
-      <span class="quote-mark">"</span>
-      <blockquote>Sania visited Queen City Academy Charter School for a book donation drive benefiting students in grades K–5. Her talk with the third-grade students was not just inspiring but also very motivating. It was a pleasure to have her lead this drive with such ease and in such an organized manner. I would love to do it again whenever possible.</blockquote>
-      <cite>Queen City Academy Charter School</cite>
-    </div>
-    <div class="testi sm">
-      <span class="quote-mark">"</span>
-      <blockquote>I had an amazing time making sandwiches for the Giving Collective, knowing I was helping the community get the right nutrition for their day.</blockquote>
-      <cite>Hudson, Volunteer</cite>
-    </div>
-    <div class="testi sm2">
-      <span class="quote-mark">"</span>
-      <blockquote>Zaara, Sania, and Veer are doing incredible work! It is so inspiring to see such young leaders helping others and bringing people together.</blockquote>
-      <cite>Perlei Salon</cite>
-    </div>
-    <div class="testi sm3">
-      <span class="quote-mark">"</span>
-      <blockquote>So proud to back the Giving Collective! Their commitment to helping others is contagious. Keep up the amazing work!</blockquote>
-      <cite>Kareem</cite>
-    </div>
+    <button class="testi-arrow testi-prev" id="testiPrev" aria-label="Previous">&#8592;</button>
+    <button class="testi-arrow testi-next" id="testiNext" aria-label="Next">&#8594;</button>
+    <div class="testi-dots" id="testiDots"></div>
   </div>
 </section>
 
@@ -221,9 +251,10 @@
     <h2>Be part of something <em>bigger</em></h2>
     <p>Sign up to get updates on our latest drives, partnerships, and opportunities to make a difference in your community.</p>
     <div class="email-form">
-      <input type="email" placeholder="Your email address">
-      <button type="button">Sign Up</button>
+      <input type="email" id="joinEmail" placeholder="Your email address">
+      <button type="button" id="joinBtn" onclick="submitEmail()">Sign Up</button>
     </div>
+    <p id="joinMsg" style="font-size:0.85rem;margin-top:0.75rem;min-height:1.2em"></p>
     <p class="join-contact">Questions? Reach us at <a href="mailto:thegivingcollective.tgc@gmail.com">thegivingcollective.tgc@gmail.com</a></p>
   </div>
 </section>
@@ -236,6 +267,40 @@
 </footer>
 
 <script>
+// ── Email signup ──────────────────────────────────────────────────────────────
+function submitEmail() {
+  const input = document.getElementById('joinEmail');
+  const btn   = document.getElementById('joinBtn');
+  const msg   = document.getElementById('joinMsg');
+  const email = input.value.trim();
+
+  if (!email || !email.includes('@')) {
+    msg.style.color = 'rgba(255,200,200,0.9)';
+    msg.textContent = 'Please enter a valid email address.';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  fetch('https://script.google.com/macros/s/AKfycbzZWx6zV_8x3pt9hVUFTaHisAx86Ropl083fMy0_bCJsQEbIG45mA_6uaD2OxRTAHM/exec', {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: 'email=' + encodeURIComponent(email)
+  }).then(() => {
+    msg.style.color = 'rgba(255,255,255,0.85)';
+    msg.textContent = 'You\'re in! We\'ll keep you posted.';
+    input.value = '';
+    btn.textContent = 'Done';
+  }).catch(() => {
+    msg.style.color = 'rgba(255,200,200,0.9)';
+    msg.textContent = 'Something went wrong — please try again.';
+    btn.disabled = false;
+    btn.textContent = 'Sign Up';
+  });
+}
+
 // ── Carousel ──────────────────────────────────────────────────────────────────
 (function() {
   const track  = document.getElementById('carouselTrack');
@@ -274,6 +339,44 @@
 
   // Dot clicks already reset via onclick → goTo, restart timer
   dotsEl.addEventListener('click', resetTimer);
+
+  startTimer();
+})();
+
+// ── Testimonial carousel ──────────────────────────────────────────────────────
+(function() {
+  const track  = document.getElementById('testiTrack');
+  const dotsEl = document.getElementById('testiDots');
+  const slides = track.querySelectorAll('.testi-slide');
+  const total  = slides.length;
+  let current  = 0;
+  let timer;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'testi-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `Testimonial ${i + 1}`);
+    dot.onclick = () => { goTo(i); resetTimer(); };
+    dotsEl.appendChild(dot);
+  });
+
+  function goTo(n) {
+    current = (n + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dotsEl.querySelectorAll('.testi-dot').forEach((d, i) =>
+      d.classList.toggle('active', i === current)
+    );
+  }
+
+  document.getElementById('testiPrev').onclick = () => { goTo(current - 1); resetTimer(); };
+  document.getElementById('testiNext').onclick = () => { goTo(current + 1); resetTimer(); };
+
+  function startTimer() { timer = setInterval(() => goTo(current + 1), 5000); }
+  function resetTimer()  { clearInterval(timer); startTimer(); }
+
+  const wrap = track.closest('.testi-carousel-wrap');
+  wrap.addEventListener('mouseenter', () => clearInterval(timer));
+  wrap.addEventListener('mouseleave', startTimer);
 
   startTimer();
 })();
