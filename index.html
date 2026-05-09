@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         #hero-carousel {
+            position: relative;
             max-height: 600px;
         }
         #hero-carousel .carousel-item img {
@@ -24,10 +25,8 @@
             align-items: center;
             justify-content: center;
             background: rgba(0,0,0,0.3);
-        }
-        #hero-carousel .carousel-caption h1 {
             color: #fff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-align: center;
         }
     </style>
 </head>
@@ -81,8 +80,8 @@
                 <img src="https://placehold.co/1920x600/333333/ffffff" class="d-block w-100" alt="Giving Collective">
             </div>
         </div>
-        <div class="carousel-caption d-flex flex-column justify-content-center h-100">
-            <h1 class="display-1">Giving Collective</h1>
+        <div class="carousel-caption">
+            <h1 class="display-1" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Giving Collective</h1>
         </div>
     </div>
 
