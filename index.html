@@ -1,209 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giving Collective</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <style>
-        #hero-carousel {
-            position: relative;
-            max-height: 600px;
-        }
-        #hero-carousel .carousel-item img {
-            object-fit: cover;
-            height: 600px;
-        }
-        #hero-carousel .carousel-caption {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0,0,0,0.3);
-            color: #fff;
-            text-align: center;
-            z-index: 10;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Giving Collective — Student-Run 501(c)(3) Nonprofit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,700&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-brand logo-container" href="index.html"><img src="images/logo.png" alt="Giving Collective Logo"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="impact.html">Our Impact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="team.html">Meet the Team</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="volunteer.html">Volunteer</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="locations.html">Drop-off Locations</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-primary" href="donate.html">Donate Now</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img src="images/logo.png" alt="Giving Collective">
+  </a>
+  <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.nextElementSibling.classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="impact.html">Impact</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="volunteer.html">Volunteer</a></li>
+    <li><a href="locations.html">Drop-off</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="donate.html" class="nav-donate">Donate</a></li>
+  </ul>
+</nav>
 
-    <!-- Hero Carousel -->
-    <div id="hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="https://placehold.co/1920x600" class="d-block w-100" alt="Giving Collective">
-            </div>
-            <div class="carousel-item">
-                <img src="https://placehold.co/1920x600/1a1a1a/ffffff" class="d-block w-100" alt="Giving Collective">
-            </div>
-            <div class="carousel-item">
-                <img src="https://placehold.co/1920x600/333333/ffffff" class="d-block w-100" alt="Giving Collective">
-            </div>
-        </div>
-        <div class="carousel-caption">
-            <h1 class="display-1" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Giving Collective</h1>
-        </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge fade-up">Student-Run · 501(c)(3) Certified Nonprofit</div>
+    <h1 class="fade-up delay-1">When a community <em>decides to care</em></h1>
+    <p class="hero-sub fade-up delay-2">The Giving Collective is a certified student-run nonprofit dedicated to ensuring no student feels invisible. We collect books, clothing, toys, and food — and deliver them directly to the children who need them most.</p>
+    <div class="hero-actions fade-up delay-3">
+      <a href="volunteer.html" class="btn-dark">Get Involved</a>
+      <a href="impact.html" class="btn-ghost">See Our Impact</a>
     </div>
+    <div class="hero-stats fade-up delay-4">
+      <div class="stat">
+        <div class="stat-num">278+</div>
+        <div class="stat-label">Students Served</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">10K+</div>
+        <div class="stat-label">LEGO Pieces Donated</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Schools Reached</div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Main Content -->
-    <main class="container my-5">
+  <div class="hero-visual fade-up delay-2">
+    <div class="hero-photo-grid">
+      <img src="images/image1.jpg" alt="Giving Collective in action">
+      <img src="images/image2.jpg" alt="Giving Collective volunteers">
+      <img src="images/image3.jpg" alt="Students receiving donations">
+    </div>
+    <div class="hero-float-card">
+      <div class="float-label">Latest Drive</div>
+      <div class="float-num">278</div>
+      <div class="float-sub">Students received coats, scarves &amp; toys</div>
+    </div>
+  </div>
+</section>
 
-        <!-- Why We Started -->
-        <section id="why-we-started" class="my-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <h2>Why We Started?</h2>
-                    <p class="lead">The inspiration for the Giving Collective began at home. One of our co-founders grew up watching her mother work in underprivileged schools, seeing firsthand the quiet struggles of her students. Her mother didn't just teach; she acted. She started her own book club, hand-delivering stories to children who didn't have libraries of their own. We saw the impact of that book club and asked ourselves, "What if we took that spark and turned it into a wildfire?" We wanted to take that spirit of grassroots giving and scale it into meaningful change. We didn't want to just recognize the problem; we wanted to solve it. What began as a small group of students with a shared vision quickly grew into a community. We became the Giving Collective—a certified student-run 501(c)(3) nonprofit dedicated to ensuring no student feels invisible.  Every donation we make is a reminder that even the smallest acts of generosity can create a lasting legacy. We are proving that when a community decides to care, we can bridge the gap between what is and what should be.</p>
-                </div>
-            </div>
-        </section>
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="story-grid">
+    <div class="story-text">
+      <div class="section-label">Why We Started</div>
+      <h2>A spark that became<br>a <em>wildfire</em></h2>
+      <p class="lead">The inspiration began at home. One of our co-founders grew up watching her mother work in underprivileged schools — seeing firsthand the quiet struggles of her students.</p>
+      <p>Her mother didn't just teach; she acted. She started her own book club, hand-delivering stories to children who didn't have libraries of their own. We saw the impact of that book club and asked ourselves: <em>"What if we took that spark and turned it into a wildfire?"</em></p>
+      <p>What began as a small group of students with a shared vision quickly grew into a community. We became the Giving Collective — a certified student-run 501(c)(3) nonprofit. Every donation we make is a reminder that even the smallest acts of generosity can create a lasting legacy.</p>
+      <p>We are proving that when a community decides to care, we can bridge the gap between what is and what should be.</p>
+    </div>
+    <div class="story-photos">
+      <img src="images/image4.jpg" alt="Community drive">
+      <img src="images/image5.jpg" alt="Volunteers at work">
+      <img src="images/image6.jpg" alt="Donations collected">
+    </div>
+  </div>
+</section>
 
-        <!-- Mission Statement -->
-        <section id="mission" class="my-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <h2 id="our-mission">Our Mission</h2>
-                    <p class="lead">We are dedicated to fostering compassion, equity, and opportunity by uniting resources and communities to support people everywhere. We believe in the power of collective generosity to uplift lives and create lasting change. Through collaboration, transparency, and a commitment to respect and shared humanity, we strive to build a world where every person has access to the care, support, and opportunities they need to thrive.</p>
-                    <p class="lead">	Looking ahead, we aim to expand our reach, deepen our impact, and continue bridging gaps in opportunity and equity around the world.  We hope to build a future where kindness kickstarts progress, and everyone can live with hope and purpose. </p>
-                </div>
-            </div>
-        </section>
+<!-- MISSION -->
+<section class="mission" id="mission">
+  <div class="mission-big-word">TOGETHER</div>
+  <div class="mission-inner">
+    <div class="section-label">Our Mission</div>
+    <h2>Fostering compassion,<br><em>equity &amp; opportunity</em></h2>
+    <p class="mission-body">We are dedicated to uniting resources and communities to support people everywhere. We believe in the power of collective generosity to uplift lives and create lasting change. Through collaboration, transparency, and a commitment to shared humanity, we strive to build a world where every person has access to the care, support, and opportunities they need to thrive.</p>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-icon">📚</div>
+        <h3>Books &amp; Learning</h3>
+        <p>Delivering hundreds of books to K–5 students across NJ schools to build brighter futures.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🧥</div>
+        <h3>Winter Warmth</h3>
+        <p>Collecting coats, scarves, hats, and gloves so no child faces winter without proper gear.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🧱</div>
+        <h3>Toys &amp; Play</h3>
+        <p>Donating LEGO sets and toys to spark creativity, collaboration, and hands-on learning.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <!-- Testimonials -->
-        <section id="testimonials" class="my-5">
-            <h2 class="text-center mb-4">What Our Community Says</h2>
-            <div id="testimonial-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#testimonial-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#testimonial-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#testimonial-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    <button type="button" data-bs-target="#testimonial-carousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                    <button type="button" data-bs-target="#testimonial-carousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <figure class="text-center p-3 bg-light rounded h-100">
-                            <blockquote class="blockquote">
-                                <p>"On February 13, 2026, we were honored to welcome our generous partners, the Giving Collective, to our school. Thanks to their incredible donation of clothing, coats, scarves, hats, gloves, and toys, 278 students in grades K–4 were able to choose 2–3 items to take home. The smiles on our students' faces said it all — it truly felt like a special shopping day just for them. Your kindness helped keep our students warm, supported, and cared for, and we are deeply grateful for your generosity and partnership. Thank you for making such a meaningful difference in our school community!"</p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer">
-                                Senator Frank Lautenberg Full-Service Community School 6
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="carousel-item">
-                        <figure class="text-center p-3 bg-light rounded h-100">
-                            <blockquote class="blockquote">
-                                <p>"Sania visited my school, Queen City Academy Charter School, for a book donation drive last year. This was organized to benefit all students in grades K–5. Her talk with the third-grade students was not just inspiring but also very motivating to each student and the staff. It was a pleasure to have her lead this drive with such ease and in such an organized manner. I would love to do it again whenever possible for my current students."</p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer">
-                                Queen City Academy Charter School
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="carousel-item">
-                        <figure class="text-center p-3 bg-light rounded h-100">
-                            <blockquote class="blockquote">
-                                <p>"I had an amazing time making sandwiches for the Giving Collective, knowing that I was helping the community get the right nutrition and food for their day."</p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer">
-                                Hudson
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="carousel-item">
-                        <figure class="text-center p-3 bg-light rounded h-100">
-                            <blockquote class="blockquote">
-                                <p>"It has been a pleasure supporting the Giving Collective. Zaara, Sania, and Veer are doing incredible work! It is so inspiring to see such young leaders helping others and bringing people together to support their community. Keep it up!"</p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer">
-                                Perlei Salon
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="carousel-item">
-                        <figure class="text-center p-3 bg-light rounded h-100">
-                            <blockquote class="blockquote">
-                                <p>"So proud to back the Giving Collective! Zaara, Veer, and Sania are incredible examples of young leadership in action. Their commitment to helping others is contagious. Keep up the amazing work!"</p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer">
-                                Kareem
-                            </figcaption>
-                        </figure>
-                    </div>
-                </div>
+<!-- IMPACT NUMBERS -->
+<section class="impact-section" id="impact">
+  <div class="section-label">Our Impact</div>
+  <h2 style="max-width:540px;margin-bottom:0.5rem">Real change, <em>measured in moments</em></h2>
+  <p style="color:var(--ink-muted);font-size:0.95rem;max-width:500px;margin-bottom:0">Every drive, every donation, every smile — it all adds up.</p>
+  <div class="impact-grid">
+    <div class="impact-card">
+      <div class="impact-num">278+</div>
+      <div class="impact-label">Students Served at<br>Lautenberg School</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num">10K+</div>
+      <div class="impact-label">LEGO Pieces<br>Donated</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num">5+</div>
+      <div class="impact-label">Schools &amp;<br>Communities Reached</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num">20+</div>
+      <div class="impact-label">Drives Planned<br>by End of 2026</div>
+    </div>
+  </div>
+</section>
 
-            </div>
-        </section>
+<!-- PHOTO GALLERY -->
+<section class="gallery">
+  <div class="section-label">Our Drives in Action</div>
+  <h2 style="margin-bottom:0.5rem">See the <em>difference we make</em></h2>
+  <div class="gallery-grid">
+    <img src="images/image1.jpg" alt="Drive 1" class="tall">
+    <img src="images/image2.jpg" alt="Drive 2" class="wide">
+    <img src="images/image3.jpg" alt="Drive 3">
+    <img src="images/image4.jpg" alt="Drive 4">
+    <img src="images/image5.jpg" alt="Drive 5">
+    <img src="images/image6.jpg" alt="Drive 6">
+    <img src="images/image7.jpg" alt="Drive 7">
+    <img src="images/image8.jpg" alt="Drive 8">
+  </div>
+</section>
 
-        <hr class="my-5">
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="voices">
+  <div class="testimonials-intro">
+    <div class="section-label">Community Voices</div>
+    <h2>What the community <em>says</em></h2>
+    <p>Real words from the schools, families, and partners we've had the privilege of serving.</p>
+  </div>
+  <div class="testi-grid">
+    <div class="testi wide">
+      <span class="quote-mark">"</span>
+      <blockquote>On February 13, 2026, we were honored to welcome the Giving Collective to our school. Thanks to their incredible donation of clothing, coats, scarves, hats, gloves, and toys, 278 students in grades K–4 were able to choose 2–3 items to take home. The smiles on our students' faces said it all — it truly felt like a special shopping day just for them.</blockquote>
+      <cite>Senator Frank Lautenberg Full-Service Community School 6</cite>
+    </div>
+    <div class="testi tall">
+      <span class="quote-mark">"</span>
+      <blockquote>Sania visited Queen City Academy Charter School for a book donation drive benefiting students in grades K–5. Her talk with the third-grade students was not just inspiring but also very motivating. It was a pleasure to have her lead this drive with such ease and in such an organized manner. I would love to do it again whenever possible.</blockquote>
+      <cite>Queen City Academy Charter School</cite>
+    </div>
+    <div class="testi sm">
+      <span class="quote-mark">"</span>
+      <blockquote>I had an amazing time making sandwiches for the Giving Collective, knowing I was helping the community get the right nutrition for their day.</blockquote>
+      <cite>Hudson, Volunteer</cite>
+    </div>
+    <div class="testi sm2">
+      <span class="quote-mark">"</span>
+      <blockquote>Zaara, Sania, and Veer are doing incredible work! It is so inspiring to see such young leaders helping others and bringing people together.</blockquote>
+      <cite>Perlei Salon</cite>
+    </div>
+    <div class="testi sm3">
+      <span class="quote-mark">"</span>
+      <blockquote>So proud to back the Giving Collective! Their commitment to helping others is contagious. Keep up the amazing work!</blockquote>
+      <cite>Kareem</cite>
+    </div>
+  </div>
+</section>
 
-        <!-- Sign Up -->
-        <section id="signup" class="text-center my-5 p-5 bg-light rounded">
-            <h2>Join Our Community</h2>
-            <p>Sign up to get updates on our latest drives, partnerships, and freewrites. Be the first to know how you can make a difference.</p>
-            <form class="row justify-content-center">
-                <div class="col-md-5">
-                    <input type="email" class="form-control" placeholder="Enter your email" required>
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary w-100">Sign Up</button>
-                </div>
-            </form>
-        </section>
+<!-- JOIN / CTA -->
+<section class="join" id="join">
+  <div class="join-inner">
+    <div class="section-label">Join Us</div>
+    <h2>Be part of something <em>bigger</em></h2>
+    <p>Sign up to get updates on our latest drives, partnerships, and opportunities to make a difference in your community.</p>
+    <div class="email-form">
+      <input type="email" placeholder="Your email address">
+      <button type="button">Sign Up</button>
+    </div>
+    <p class="join-contact">Questions? Reach us at <a href="mailto:thegivingcollective.tgc@gmail.com">thegivingcollective.tgc@gmail.com</a></p>
+  </div>
+</section>
 
-    </main>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">The Giving Collective</div>
+  <div>© 2026 The Giving Collective · All rights reserved · Student-Run 501(c)(3) Nonprofit</div>
+  <div><a href="mailto:thegivingcollective.tgc@gmail.com">thegivingcollective.tgc@gmail.com</a></div>
+</footer>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white text-center p-4">
-        <div class="container">
-            <p>Contact Us: thegivingcollective.tgc@gmail.com</p>
-            <p>&copy; 2026 Giving Collective. All Rights Reserved.</p>
-        </div>
-    </footer>
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+      obs.unobserve(e.target);
+    }
+  });
+}, {threshold: 0.12});
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/main.js"></script>
+document.querySelectorAll('.story-grid, .mission-inner, .impact-grid, .gallery-grid, .testi-grid, .testi, .impact-card, .pillar').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(28px)';
+  el.style.transition = 'opacity 0.65s ease, transform 0.65s ease';
+  obs.observe(el);
+});
+</script>
 </body>
 </html>

@@ -1,86 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donate - Giving Collective</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donate — The Giving Collective</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,700&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-brand logo-container" href="index.html"><img src="images/logo.png" alt="Giving Collective Logo"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="impact.html">Our Impact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="team.html">Meet the Team</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="volunteer.html">Volunteer</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="locations.html">Drop-off Locations</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-primary" href="donate.html">Donate Now</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img src="images/logo.png" alt="Giving Collective">
+  </a>
+  <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.nextElementSibling.classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="impact.html">Impact</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="volunteer.html">Volunteer</a></li>
+    <li><a href="locations.html">Drop-off</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="donate.html" class="nav-donate">Donate</a></li>
+  </ul>
+</nav>
 
-    <!-- Main Content -->
-    <main class="container my-5">
-        <div class="text-center mb-5">
-            <h1>Support Our Mission</h1>
-            <p class="lead fs-4">Your generosity fuels our work. Every contribution, big or small, makes a significant impact on the lives of others. We are so grateful to have you on this journey with us as we spark big change together!</p>
-        </div>
+<div class="page-header">
+  <div class="section-label">Support Our Mission</div>
+  <h1>Make a <em>difference</em></h1>
+  <p>Your generosity fuels our work. Every contribution, big or small, makes a significant impact on the lives of others.</p>
+</div>
 
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+<div class="page-content" style="margin:0 auto">
 
-                <div class="card text-center mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 fw-normal">In-Kind Donations</h4>
-                    </div>
-                    <div class="card-body">
-                        <p>Purchase essential items directly from our Amazon Wishlist. These items are shipped directly to us and distributed to those in need.</p>
-                        <a href="https://www.amazon.com/hz/wishlist/ls/YOUR-LIST-ID" class="btn btn-warning btn-lg text-dark" target="_blank">View Our Amazon Wishlist</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="donate-grid">
+    <div class="donate-card">
+      <div style="font-size:2.5rem;margin-bottom:1rem">📦</div>
+      <h3>In-Kind Donations</h3>
+      <p>Purchase essential items directly from our Amazon Wishlist. These items are shipped directly to us and distributed to those in need.</p>
+      <a href="https://www.amazon.com/hz/wishlist/ls/YOUR-LIST-ID" class="btn-green" target="_blank">View Amazon Wishlist</a>
+    </div>
+    <div class="donate-card">
+      <div style="font-size:2.5rem;margin-bottom:1rem">📍</div>
+      <h3>Drop-off a Donation</h3>
+      <p>Bring gently used books, clothing, toys, or other essentials to one of our convenient drop-off locations near you.</p>
+      <a href="locations.html" class="btn-green">Find a Drop-off Location</a>
+    </div>
+  </div>
 
-        <div class="text-center mt-5">
-            <h3>Why Your Donation Matters</h3>
-            <p class="lead fs-4">Your generosity is the heartbeat of our mission! Donations are what allow us to provide the best possible resources—from essential supplies to funding impactful community projects. As a 100% volunteer-run organization, we take pride in the fact that 100% of every dollar goes directly into the programs that support our neighbors in need. When you give, you aren't just donating; you are joining a team dedicated to sparking big change through the power of connection!  We are so grateful to have you on this journey with us as we spark big change together.</p>
-        </div>
-    </main>
+  <hr class="section-divider">
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white text-center p-4">
-        <div class="container">
-            <p>Contact Us: thegivingcollective.tgc@gmail.com</p>
-            <p>&copy; 2026 Giving Collective. All Rights Reserved.</p>
-        </div>
-    </footer>
+  <div style="background:var(--ink);color:#fff;border-radius:var(--radius-lg);padding:3rem;margin-top:1rem">
+    <div class="section-label" style="color:var(--gold-light)">
+      <span style="background:var(--gold-light);width:18px;height:2px;display:inline-block"></span>
+      Why It Matters
+    </div>
+    <h2 style="color:#fff;margin-bottom:1.25rem">100% goes <em style="color:var(--gold-light)">directly</em> to the community</h2>
+    <p style="color:rgba(255,255,255,0.72);font-size:1.05rem;max-width:680px;line-height:1.9">As a 100% volunteer-run organization, we take pride in the fact that every dollar goes directly into the programs that support our neighbors in need. When you give, you aren't just donating — you are joining a team dedicated to sparking big change through the power of connection. We are so grateful to have you on this journey with us.</p>
+  </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/main.js"></script>
+<footer>
+  <div class="footer-brand">The Giving Collective</div>
+  <div>© 2026 The Giving Collective · All rights reserved · Student-Run 501(c)(3) Nonprofit</div>
+  <div><a href="mailto:thegivingcollective.tgc@gmail.com">thegivingcollective.tgc@gmail.com</a></div>
+</footer>
+
 </body>
 </html>
