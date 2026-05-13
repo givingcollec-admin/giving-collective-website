@@ -373,14 +373,24 @@ function submitEmail() {
   document.getElementById('testiPrev').onclick = () => { goTo(current - 1); resetTimer(); };
   document.getElementById('testiNext').onclick = () => { goTo(current + 1); resetTimer(); };
 
-  function startTimer() { timer = setInterval(() => goTo(current + 1), 5000); }
+  function startTimer() { timer = setInterval(() => goTo(current + 1), 3000); }
   function resetTimer()  { clearInterval(timer); startTimer(); }
 
   const wrap = track.closest('.testi-carousel-wrap');
   wrap.addEventListener('mouseenter', () => clearInterval(timer));
-  wrap.addEventListener('mouseleave', startTimer);
+  wrap.addEventListener('mouseleave', () => { if (started) startTimer(); });
 
-  startTimer();
+  let started = false;
+  const visObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !started) {
+        started = true;
+        setTimeout(startTimer, 3000);
+        visObs.disconnect();
+      }
+    });
+  }, { threshold: 0.4 });
+  visObs.observe(wrap);
 })();
 
 // ── Scroll animations ─────────────────────────────────────────────────────────
