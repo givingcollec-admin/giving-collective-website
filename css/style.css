@@ -352,8 +352,8 @@ section{padding:6rem 5vw}
 .gallery-intro p{font-size:0.95rem;color:var(--ink-muted)}
 .gallery-grid{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  grid-template-rows:240px 240px 240px;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:repeat(4,280px);
   gap:10px;margin-top:2.5rem;
 }
 .gallery-grid img{
@@ -361,7 +361,7 @@ section{padding:6rem 5vw}
   border-radius:var(--radius);
   transition:transform 0.3s,filter 0.3s;filter:brightness(0.97);
 }
-.gallery-grid img:hover{transform:scale(1.02);filter:brightness(1.03)}
+.gallery-grid img:hover{transform:scale(1.04);filter:brightness(1.03)}
 .gallery-grid .wide{grid-column:span 2}
 .gallery-grid .tall{grid-row:span 2}
 
