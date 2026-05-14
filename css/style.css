@@ -291,10 +291,8 @@ section{padding:6rem 5vw}
 .mission-inner{
   position:relative;z-index:1;
   max-width:1140px;
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:5rem;align-items:center;
 }
-.mission-text{}
+.mission-text{max-width:680px;margin-bottom:3rem}
 .mission .section-label{color:var(--green)}
 .mission .section-label::before{background:var(--accent-green)}
 .mission h2{color:var(--ink);margin-bottom:1.75rem}
@@ -303,17 +301,14 @@ section{padding:6rem 5vw}
   font-size:1.05rem;font-weight:300;line-height:1.9;
   color:var(--ink-muted);margin-bottom:0;
 }
-.pillars{display:flex;flex-direction:column;gap:1.1rem}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
 .pillar{
   background:#fff;
   border:1.5px solid var(--border);
-  border-radius:var(--radius-lg);padding:1.6rem 1.75rem;
-  transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;
+  border-radius:var(--radius-lg);padding:1.75rem;
+  transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s;
 }
-.pillar:nth-child(1){transform:rotate(-1.8deg) translateX(-8px)}
-.pillar:nth-child(2){transform:rotate(1.2deg) translateX(14px)}
-.pillar:nth-child(3){transform:rotate(-0.8deg) translateX(4px)}
-.pillar:hover{transform:rotate(0deg) translateX(0) scale(1.02);box-shadow:var(--shadow-lg);border-color:var(--green)}
+.pillar:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--green)}
 .pillar-icon{
   font-size:1.8rem;margin-bottom:1rem;
   width:52px;height:52px;
@@ -600,7 +595,7 @@ footer a:hover{color:var(--accent-green)}
   .hero-float-card{left:0;bottom:16px}
   .story-grid{grid-template-columns:1fr;gap:2.5rem}
   .story-photos{height:300px}
-  .mission-inner{grid-template-columns:1fr;gap:2.5rem}
+  .pillars{grid-template-columns:1fr}
   .pillar:nth-child(1),.pillar:nth-child(2),.pillar:nth-child(3){transform:none}
   .impact-grid{grid-template-columns:repeat(2,1fr)}
   .gallery-grid{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(4,200px)}
