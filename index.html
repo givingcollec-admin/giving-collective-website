@@ -332,6 +332,11 @@ function submitEmail() {
     dotsEl.querySelectorAll('.carousel-dot').forEach((d, i) =>
       d.classList.toggle('active', i === current)
     );
+    // Ken Burns: restart zoom animation on newly active slide
+    slides.forEach((s, i) => {
+      s.classList.remove('kb-active');
+      if (i === current) { void s.offsetWidth; s.classList.add('kb-active'); }
+    });
   }
 
   function next() { goTo(current + 1); }
@@ -399,22 +404,106 @@ function submitEmail() {
 })();
 
 // ── Scroll animations ─────────────────────────────────────────────────────────
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.style.opacity = '1';
-      e.target.style.transform = 'translateY(0)';
-      obs.unobserve(e.target);
-    }
-  });
-}, {threshold: 0.12});
 
-document.querySelectorAll('.story-grid, .mission-inner, .impact-grid, .gallery-grid, .testi-grid, .testi, .impact-card, .pillar').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(28px)';
-  el.style.transition = 'opacity 0.65s ease, transform 0.65s ease';
-  obs.observe(el);
-});
+// 1. Staggered card/section reveals
+(function() {
+  const CARDS = '.pillar, .impact-card, .gallery-grid img, .team-card, .location-card, .vision-card, .donate-card, .vol-reason';
+  const SECTIONS = '.story-text, .mission-text, .pillars, .impact-grid, .gallery-grid, .hero-stats, .testimonials-intro, .story-photos, .join-inner';
+
+  document.querySelectorAll(CARDS).forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(36px)';
+    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+  });
+  document.querySelectorAll(SECTIONS).forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(22px)';
+    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+  });
+
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+      el.querySelectorAll('.pillar, .impact-card, .gallery-grid img, .team-card, .donate-card, .vol-reason').forEach((child, i) => {
+        setTimeout(() => { child.style.opacity = '1'; child.style.transform = 'none'; }, 80 + i * 130);
+      });
+      revealObs.unobserve(el);
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll(SECTIONS).forEach(el => revealObs.observe(el));
+})();
+
+// 2. Animated counters for stats + impact numbers
+(function() {
+  function animateCounter(el) {
+    const raw = el.textContent.trim();
+    const suffix = raw.replace(/^[\d.]+/, '');
+    const num = parseFloat(raw);
+    if (isNaN(num)) return;
+    const duration = 1600;
+    const start = performance.now();
+    function tick(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = Math.round(eased * num) + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+      else { el.classList.add('popped'); setTimeout(() => el.classList.remove('popped'), 400); }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      animateCounter(e.target);
+      counterObs.unobserve(e.target);
+    });
+  }, { threshold: 0.6 });
+
+  document.querySelectorAll('.stat-num, .impact-num').forEach(el => counterObs.observe(el));
+})();
+
+// 3. Nav scroll spy — highlight nav link for visible section
+(function() {
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-links a');
+  if (!sections.length) return;
+
+  const spyObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(a => a.classList.toggle('nav-active', a.getAttribute('href') === '#' + e.target.id));
+      }
+    });
+  }, { rootMargin: '-25% 0px -65% 0px', threshold: 0 });
+
+  sections.forEach(s => spyObs.observe(s));
+})();
+
+// 4. Button ripple on click
+(function() {
+  document.querySelectorAll('.btn-dark, .btn-ghost, .btn-green, .nav-donate').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      const r = document.createElement('span');
+      r.className = 'ripple';
+      const rect = this.getBoundingClientRect();
+      r.style.left = (e.clientX - rect.left) + 'px';
+      r.style.top  = (e.clientY - rect.top)  + 'px';
+      this.appendChild(r);
+      setTimeout(() => r.remove(), 700);
+    });
+  });
+})();
+
+// 5. Kick off Ken Burns on first carousel slide
+(function() {
+  const first = document.querySelector('.carousel-slide');
+  if (first) first.classList.add('kb-active');
+})();
 </script>
 </body>
 </html>

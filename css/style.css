@@ -503,6 +503,45 @@ footer a:hover{color:var(--accent-green)}
 .delay-3{animation-delay:0.34s}
 .delay-4{animation-delay:0.48s}
 
+/* Ken Burns on active carousel slide */
+@keyframes kenburns{
+  from{transform:scale(1) translate(0,0)}
+  to{transform:scale(1.08) translate(-1%,0.8%)}
+}
+.carousel-slide.kb-active{
+  animation:kenburns 7s ease-in-out forwards;
+}
+
+/* Nav scroll-spy active link */
+.nav-links a.nav-active{color:var(--green);font-weight:600}
+
+/* Button ripple */
+.btn-dark,.btn-ghost,.btn-green,.nav-donate{
+  position:relative;overflow:hidden;
+}
+.ripple{
+  position:absolute;border-radius:50%;
+  width:120px;height:120px;
+  margin-top:-60px;margin-left:-60px;
+  background:rgba(255,255,255,0.28);
+  transform:scale(0);opacity:1;
+  animation:ripple-out 0.65s ease-out forwards;
+  pointer-events:none;
+}
+@keyframes ripple-out{
+  to{transform:scale(4);opacity:0}
+}
+
+/* Stat number highlight pulse when counted */
+@keyframes statPop{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.12)}
+  100%{transform:scale(1)}
+}
+.stat-num.popped,.impact-num.popped{
+  animation:statPop 0.4s ease;
+}
+
 /* ===== INNER PAGE CONTENT ===== */
 .page-content{padding:4rem 5vw 6rem;max-width:1140px}
 .page-content h2{margin-bottom:1.5rem}
