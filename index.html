@@ -308,82 +308,116 @@ function submitEmail() {
   });
 }
 
-// ── Carousel ──────────────────────────────────────────────────────────────────
+// ── Carousel (infinite loop) ──────────────────────────────────────────────────
 (function() {
   const track  = document.getElementById('carouselTrack');
   const dotsEl = document.getElementById('carouselDots');
-  const slides = track.querySelectorAll('.carousel-slide');
+  const slides = Array.from(track.querySelectorAll('.carousel-slide'));
   const total  = slides.length;
-  let current  = 0;
+  let pos = 1; // position in cloned track; 0 = cloned-last, 1..total = real, total+1 = cloned-first
   let timer;
 
-  // Build dots
+  // Clone first and last for seamless wrap
+  track.appendChild(slides[0].cloneNode(true));
+  track.insertBefore(slides[total - 1].cloneNode(true), slides[0]);
+
+  // Jump silently to pos=1 (real first slide)
+  track.style.transition = 'none';
+  track.style.transform = `translateX(-100%)`;
+
+  // Build dots for real slides only
   slides.forEach((_, i) => {
     const dot = document.createElement('button');
     dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
     dot.setAttribute('aria-label', `Slide ${i + 1}`);
-    dot.onclick = () => goTo(i);
+    dot.onclick = () => { moveTo(i + 1); resetTimer(); };
     dotsEl.appendChild(dot);
   });
 
-  function goTo(n) {
-    current = (n + total) % total;
-    track.style.transform = `translateX(-${current * 100}%)`;
+  function updateDots() {
     dotsEl.querySelectorAll('.carousel-dot').forEach((d, i) =>
-      d.classList.toggle('active', i === current)
+      d.classList.toggle('active', i === pos - 1)
     );
-    // Ken Burns: restart zoom animation on newly active slide
-    slides.forEach((s, i) => {
-      s.classList.remove('kb-active');
-      if (i === current) { void s.offsetWidth; s.classList.add('kb-active'); }
-    });
   }
 
-  function next() { goTo(current + 1); }
+  function updateKB() {
+    const allSlides = track.querySelectorAll('.carousel-slide');
+    allSlides.forEach(s => s.classList.remove('kb-active'));
+    const active = allSlides[pos];
+    if (active) { void active.offsetWidth; active.classList.add('kb-active'); }
+  }
 
-  function startTimer() { timer = setInterval(next, 3000); }
+  function moveTo(n, animate = true) {
+    track.style.transition = animate ? 'transform 0.8s cubic-bezier(0.77,0,0.18,1)' : 'none';
+    pos = n;
+    track.style.transform = `translateX(-${pos * 100}%)`;
+    if (animate) updateDots();
+    updateKB();
+  }
+
+  // After transition: silently reset if landed on a clone
+  track.addEventListener('transitionend', () => {
+    if (pos === total + 1) { pos = 1;     moveTo(pos, false); updateDots(); }
+    if (pos === 0)         { pos = total; moveTo(pos, false); updateDots(); }
+  });
+
+  function startTimer() { timer = setInterval(() => moveTo(pos + 1), 3000); }
   function resetTimer()  { clearInterval(timer); startTimer(); }
 
-  // Pause on hover
   const wrap = track.closest('.carousel-wrap');
   wrap.addEventListener('mouseenter', () => clearInterval(timer));
   wrap.addEventListener('mouseleave', startTimer);
 
-  // Dot clicks already reset via onclick → goTo, restart timer
-  dotsEl.addEventListener('click', resetTimer);
-
+  updateKB();
   startTimer();
 })();
 
-// ── Testimonial carousel ──────────────────────────────────────────────────────
+// ── Testimonial carousel (infinite loop) ──────────────────────────────────────
 (function() {
   const track  = document.getElementById('testiTrack');
   const dotsEl = document.getElementById('testiDots');
-  const slides = track.querySelectorAll('.testi-slide');
+  const slides = Array.from(track.querySelectorAll('.testi-slide'));
   const total  = slides.length;
-  let current  = 0;
+  let pos = 1;
   let timer;
+
+  // Clone first and last for seamless wrap
+  track.appendChild(slides[0].cloneNode(true));
+  track.insertBefore(slides[total - 1].cloneNode(true), slides[0]);
+
+  track.style.transition = 'none';
+  track.style.transform = `translateX(-100%)`;
 
   slides.forEach((_, i) => {
     const dot = document.createElement('button');
     dot.className = 'testi-dot' + (i === 0 ? ' active' : '');
     dot.setAttribute('aria-label', `Testimonial ${i + 1}`);
-    dot.onclick = () => { goTo(i); resetTimer(); };
+    dot.onclick = () => { moveTo(i + 1); resetTimer(); };
     dotsEl.appendChild(dot);
   });
 
-  function goTo(n) {
-    current = (n + total) % total;
-    track.style.transform = `translateX(-${current * 100}%)`;
+  function updateDots() {
     dotsEl.querySelectorAll('.testi-dot').forEach((d, i) =>
-      d.classList.toggle('active', i === current)
+      d.classList.toggle('active', i === pos - 1)
     );
   }
 
-  document.getElementById('testiPrev').onclick = () => { goTo(current - 1); resetTimer(); };
-  document.getElementById('testiNext').onclick = () => { goTo(current + 1); resetTimer(); };
+  function moveTo(n, animate = true) {
+    track.style.transition = animate ? 'transform 0.6s cubic-bezier(0.77,0,0.18,1)' : 'none';
+    pos = n;
+    track.style.transform = `translateX(-${pos * 100}%)`;
+    if (animate) updateDots();
+  }
 
-  function startTimer() { timer = setInterval(() => goTo(current + 1), 3000); }
+  track.addEventListener('transitionend', () => {
+    if (pos === total + 1) { pos = 1;     moveTo(pos, false); updateDots(); }
+    if (pos === 0)         { pos = total; moveTo(pos, false); updateDots(); }
+  });
+
+  document.getElementById('testiPrev').onclick = () => { moveTo(pos - 1); resetTimer(); };
+  document.getElementById('testiNext').onclick = () => { moveTo(pos + 1); resetTimer(); };
+
+  function startTimer() { timer = setInterval(() => moveTo(pos + 1), 3000); }
   function resetTimer()  { clearInterval(timer); startTimer(); }
 
   const wrap = track.closest('.testi-carousel-wrap');
@@ -499,11 +533,6 @@ function submitEmail() {
   });
 })();
 
-// 5. Kick off Ken Burns on first carousel slide
-(function() {
-  const first = document.querySelector('.carousel-slide');
-  if (first) first.classList.add('kb-active');
-})();
 </script>
 </body>
 </html>
