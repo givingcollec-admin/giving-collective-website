@@ -38,13 +38,11 @@ p{line-height:1.75}
   height:clamp(380px,55vh,640px);
 }
 .carousel-logo-panel{
-  background:#fff;
-  display:flex;align-items:center;justify-content:center;
-  padding:0;
+  background:#fff url('images/logo.png') center/cover no-repeat;
+  overflow:hidden;
 }
 .carousel-logo-panel img{
-  width:100%;height:100%;
-  object-fit:cover;
+  display:none;
 }
 .carousel-wrap{
   position:relative;width:100%;
