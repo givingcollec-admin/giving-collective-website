@@ -32,11 +32,41 @@ h3{font-size:1.2rem;font-weight:700}
 p{line-height:1.75}
 
 /* ===== CAROUSEL ===== */
-/* two-column row: carousel left, logo right */
+/* three-column row: brand | carousel | logo */
 .carousel-hero-row{
-  display:grid;grid-template-columns:3fr 2fr;
+  display:grid;grid-template-columns:1.2fr 2.5fr 1.3fr;
   height:clamp(380px,55vh,640px);
 }
+.carousel-brand-panel{
+  background:var(--green);
+  display:flex;flex-direction:column;
+  justify-content:center;
+  padding:2.5rem 2rem;
+  gap:0.75rem;
+}
+.carousel-brand-panel .brand-intro-badge{
+  font-size:0.65rem;font-weight:700;letter-spacing:0.13em;
+  text-transform:uppercase;color:rgba(255,255,255,0.7);
+}
+.carousel-brand-panel .brand-intro-title{
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.6rem,3vw,2.4rem);
+  font-weight:900;color:#fff;
+  line-height:1.1;letter-spacing:-0.02em;
+}
+.carousel-brand-panel .brand-intro-tagline{
+  font-size:0.95rem;color:rgba(255,255,255,0.8);
+  font-style:italic;
+}
+.btn-brand{
+  display:inline-block;margin-top:0.5rem;
+  background:#fff;color:var(--green);
+  font-size:0.85rem;font-weight:700;
+  padding:0.6rem 1.4rem;border-radius:100px;
+  text-decoration:none;width:fit-content;
+  transition:background 0.2s,transform 0.15s;
+}
+.btn-brand:hover{background:var(--green-pale);transform:translateY(-2px)}
 .carousel-logo-panel{
   background:#fff;
   overflow:hidden;
@@ -66,32 +96,6 @@ p{line-height:1.75}
 .carousel-slide--video video{
   position:absolute;inset:0;width:100%;height:100%;
   object-fit:cover;object-position:center top;
-}
-/* brand intro below carousel */
-.brand-intro{
-  display:flex;align-items:center;gap:1.5rem;
-  background:#fff;
-  padding:2rem clamp(1.5rem,6vw,5rem);
-  border-bottom:1px solid #eee;
-}
-.brand-intro-logo{
-  width:clamp(52px,7vw,80px);height:auto;flex-shrink:0;
-}
-.brand-intro-text{
-  display:flex;flex-direction:column;gap:0.25rem;
-}
-.brand-intro-badge{
-  font-size:0.7rem;font-weight:700;letter-spacing:0.13em;
-  text-transform:uppercase;color:var(--green);
-}
-.brand-intro-title{
-  font-family:'Fraunces',serif;
-  font-size:clamp(1.6rem,4vw,2.6rem);
-  font-weight:900;color:var(--ink);
-  line-height:1.1;letter-spacing:-0.02em;
-}
-.brand-intro-tagline{
-  font-size:0.95rem;color:#555;font-weight:400;
 }
 .carousel-dots{
   position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
