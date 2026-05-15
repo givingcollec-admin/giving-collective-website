@@ -592,7 +592,7 @@ footer a:hover{color:var(--accent-green)}
 .contact-info{background:var(--ink);color:#fff;border-radius:var(--radius-lg);padding:2.5rem}
 .contact-info h3{color:#fff;margin-bottom:1.5rem}
 .contact-info p{color:rgba(255,255,255,0.65);font-size:0.9rem}
-.contact-info a{color:var(--gold-light);text-decoration:none}
+.contact-info a{color:var(--green-light);text-decoration:none}
 
 /* Volunteer page */
 .vol-reasons{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin:2rem 0}
