@@ -587,10 +587,10 @@ footer a:hover{color:var(--accent-green)}
   transition:background 0.2s,transform 0.15s;display:inline-block;text-decoration:none;
 }
 .btn-green:hover{background:var(--green-mid);transform:translateY(-2px)}
-.contact-info{background:var(--green-pale);color:var(--ink);border-radius:var(--radius-lg);padding:2.5rem}
-.contact-info h3{color:var(--ink);margin-bottom:1.5rem}
-.contact-info p{color:var(--ink);font-size:0.9rem}
-.contact-info a{color:var(--green);text-decoration:none;font-weight:600}
+.contact-info{background:var(--green);color:#fff;border-radius:var(--radius-lg);padding:2.5rem}
+.contact-info h3{color:#fff;margin-bottom:1.5rem}
+.contact-info p{color:rgba(255,255,255,0.85);font-size:0.9rem}
+.contact-info a{color:var(--gold-light);text-decoration:none;font-weight:600}
 
 /* Volunteer page */
 .vol-reasons{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin:2rem 0}
