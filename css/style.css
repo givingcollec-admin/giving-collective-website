@@ -299,7 +299,7 @@ section{padding:6rem 5vw}
   font-size:1.05rem;font-weight:300;line-height:1.9;
   color:var(--ink-muted);margin-bottom:0;
 }
-.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:1.25rem;align-items:center}
 .pillar{
   background:#fff;
   border:1.5px solid var(--border);
