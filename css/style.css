@@ -655,7 +655,7 @@ footer a:hover{color:var(--accent-green)}
   mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);
 }
 .ticker-track{
-  display:flex;align-items:center;gap:3rem;
+  display:flex;align-items:center;gap:5.5rem;
   width:max-content;
   animation:ticker-scroll 30s linear infinite;
 }
@@ -663,11 +663,11 @@ footer a:hover{color:var(--accent-green)}
 .ticker-item{
   display:flex;align-items:center;justify-content:center;
   flex-shrink:0;
-  height:52px;
+  height:70px;
 }
 .ticker-item img{
-  height:40px;width:auto;
-  max-width:140px;
+  height:58px;width:auto;
+  max-width:180px;
   object-fit:contain;
   filter:grayscale(100%);opacity:0.55;
   transition:filter 0.2s,opacity 0.2s;
