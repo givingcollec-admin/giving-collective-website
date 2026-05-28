@@ -293,7 +293,7 @@ const drives = [
   },
   {
     id: 'qcacs-1250',
-    name: 'Queens City Academy Charter School (1,250 Books)',
+    name: 'Queens City Academy Charter School',
     resource: 'Books',
     detailsLink: 'drives.html#qcacs-1250',
     status: 'past',
@@ -301,7 +301,7 @@ const drives = [
   },
   {
     id: 'qcacs-420',
-    name: 'Queens City Academy Charter School (420 Books)',
+    name: 'Queens City Academy Charter School',
     resource: 'Books',
     detailsLink: 'drives.html#qcacs-420',
     status: 'past',
@@ -309,7 +309,7 @@ const drives = [
   },
   {
     id: 'qcacs-629',
-    name: 'Queens City Academy Charter School (629 Books)',
+    name: 'Queens City Academy Charter School',
     resource: 'Books',
     detailsLink: 'drives.html#qcacs-629',
     status: 'past',
@@ -551,7 +551,7 @@ function buildCard(drive) {
     <div class="drive-card-header">
       <div class="drive-name">${drive.name}</div>
     </div>
-    <div class="drive-meta">${drive.locations.length} drop-off location${drive.locations.length !== 1 ? 's' : ''} &nbsp;·&nbsp; ${drive.resource}</div>
+    <div class="drive-meta">${drive.locations.length} drop-off location${drive.locations.length !== 1 ? 's' : ''}</div>
     ${locItems}
     <a href="${drive.detailsLink}" onclick="event.stopPropagation()" style="display:inline-block;margin-top:0.6rem;font-size:0.75rem;font-weight:600;color:var(--green);text-decoration:none">More details →</a>`;
   return card;
