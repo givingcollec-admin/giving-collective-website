@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Drives — The Giving Collective</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,700&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img src="images/logo.png" alt="Giving Collective">
+  </a>
+  <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.nextElementSibling.classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="impact.html">Impact</a></li>
+    <li><a href="drives.html" class="nav-active">All Drives</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="volunteer.html">Volunteer</a></li>
+    <li><a href="locations.html">Drop-off</a></li>
+    <li><a href="schools.html">Schools in Need</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="donate.html" class="nav-donate">Donate</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="section-label">Our Full History</div>
+  <h1>All <em>Drives</em></h1>
+  <p>Every drive we've run — the schools we've served, the resources we've collected, and the communities we've reached.</p>
+</div>
+
+<div class="page-content" style="margin:0 auto">
+
+  <!-- ACTIVE DRIVES -->
+  <div class="section-label" style="color:var(--accent-green)">Currently Running</div>
+  <h2 style="margin-bottom:0.5rem">Active <em>Drives</em></h2>
+  <p style="color:var(--ink-muted);margin-bottom:2rem">These drives are actively collecting donations. Find a drop-off location near you.</p>
+
+  <div class="all-drives-grid">
+
+    <div class="all-drive-card active-drive-card">
+      <div class="adc-top">
+        <span class="adc-badge adc-badge-active">● Active</span>
+        <span class="adc-resource">📦 Supplies</span>
+      </div>
+      <h4 class="adc-school">Barnabas Health Center</h4>
+      <div class="adc-location">📍 New Jersey</div>
+      <p class="adc-desc">Collecting essential supplies and resources to support patients and families at Barnabas Health Center.</p>
+      <a href="locations.html?tab=active" class="adc-link">View drop-off locations →</a>
+    </div>
+
+    <div class="all-drive-card active-drive-card">
+      <div class="adc-top">
+        <span class="adc-badge adc-badge-active">● Active</span>
+        <span class="adc-resource">🧥 Clothing</span>
+      </div>
+      <h4 class="adc-school">Barnabas Health Center</h4>
+      <div class="adc-location">📍 New Jersey</div>
+      <p class="adc-desc">Ongoing collection of clothing and essential items for community members served by Barnabas Health Center.</p>
+      <a href="locations.html?tab=active" class="adc-link">View drop-off locations →</a>
+    </div>
+
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- PAST DRIVES -->
+  <div class="section-label">Completed</div>
+  <h2 style="margin-bottom:0.5rem">Past <em>Drives</em></h2>
+  <p style="color:var(--ink-muted);margin-bottom:2rem">Drives we've completed and the impact we made. Click any card for drop-off location history.</p>
+
+  <div class="all-drives-grid">
+
+    <div class="all-drive-card past-drive-card" onclick="window.location='locations.html?tab=past'" style="cursor:pointer">
+      <div class="adc-top">
+        <span class="adc-badge adc-badge-past">Completed</span>
+        <span class="adc-resource">📚 Books</span>
+      </div>
+      <div class="adc-qty">1,250 Books</div>
+      <h4 class="adc-school">Queens City Academy Charter School</h4>
+      <div class="adc-location">📍 Plainfield, NJ</div>
+      <p class="adc-desc">Donated 1,250 books to K–5 students to build literacy and spark a lifelong love of reading.</p>
+      <span class="adc-link">View drive details →</span>
+    </div>
+
+    <div class="all-drive-card past-drive-card" onclick="window.location='locations.html?tab=past'" style="cursor:pointer">
+      <div class="adc-top">
+        <span class="adc-badge adc-badge-past">Completed</span>
+        <span class="adc-resource">📚 Books</span>
+      </div>
+      <div class="adc-qty">420 Books</div>
+      <h4 class="adc-school">Queens City Academy Charter School</h4>
+      <div class="adc-location">📍 Plainfield, NJ</div>
+      <p class="adc-desc">Delivered 420 books directly to students at Queens City Academy to support classroom learning.</p>
+      <span class="adc-link">View drive details →</span>
+    </div>
+
+    <div class="all-drive-card past-drive-card" onclick="window.location='locations.html?tab=past&drive=paterson'" style="cursor:pointer">
+      <div class="adc-top">
+        <span class="adc-badge adc-badge-past">Completed</span>
+        <span class="adc-resource">🧥 Winter Clothing</span>
+      </div>
+      <div class="adc-qty">650 Items</div>
+      <h4 class="adc-school">Paterson Public School No. 6</h4>
+      <div class="adc-location">📍 Paterson, NJ</div>
+      <p class="adc-desc">Collected 650 pieces of winter clothing — coats, hats, scarves, and gloves — so no student faced the cold unprepared.</p>
+      <span class="adc-link">View drive details →</span>
+    </div>
+
+    <div class="all-drive-card past-drive-card" onclick="window.location='locations.html?tab=past'" style="cursor:pointer">
+      <div class="adc-top">
+        <span class="adc-badge adc-badge-past">Completed</span>
+        <span class="adc-resource">🍱 Food</span>
+      </div>
+      <div class="adc-qty">80 Lunches</div>
+      <h4 class="adc-school">SHIP Food Center</h4>
+      <div class="adc-location">📍 Somerville, NJ</div>
+      <p class="adc-desc">Prepared and delivered 80 lunches to support the SHIP Food Center and the families they serve in Somerville.</p>
+      <span class="adc-link">View drive details →</span>
+    </div>
+
+    <div class="all-drive-card past-drive-card" onclick="window.location='locations.html?tab=past'" style="cursor:pointer">
+      <div class="adc-top">
+        <span class="adc-badge adc-badge-past">Completed</span>
+        <span class="adc-resource">🧱 LEGO Sets</span>
+      </div>
+      <div class="adc-qty">10,000+ Pieces</div>
+      <h4 class="adc-school">Park Elementary School</h4>
+      <div class="adc-location">📍 Newark, NJ</div>
+      <p class="adc-desc">Donated over 10,000 LEGO pieces to Park Elementary students, sparking creativity, collaboration, and hands-on learning.</p>
+      <span class="adc-link">View drive details →</span>
+    </div>
+
+    <div class="all-drive-card past-drive-card" onclick="window.location='locations.html?tab=past'" style="cursor:pointer">
+      <div class="adc-top">
+        <span class="adc-badge adc-badge-past">Completed</span>
+        <span class="adc-resource">👕 Clothing</span>
+      </div>
+      <div class="adc-qty">150 Items</div>
+      <h4 class="adc-school">Essex Valley School</h4>
+      <div class="adc-location">📍 West Caldwell, NJ</div>
+      <p class="adc-desc">Collected 150 clothing items for students at Essex Valley School to keep them warm and cared for.</p>
+      <span class="adc-link">View drive details →</span>
+    </div>
+
+    <div class="all-drive-card past-drive-card" onclick="window.location='locations.html?tab=past'" style="cursor:pointer">
+      <div class="adc-top">
+        <span class="adc-badge adc-badge-past">Completed</span>
+        <span class="adc-resource">📦 Supplies</span>
+      </div>
+      <div class="adc-qty">550 Items</div>
+      <h4 class="adc-school">Sonia Sotomayor School No. 21</h4>
+      <div class="adc-location">📍 Passaic, NJ</div>
+      <p class="adc-desc">Gathered 550 essential items for students at Sonia Sotomayor School No. 21 to support their everyday needs.</p>
+      <span class="adc-link">View drive details →</span>
+    </div>
+
+    <div class="all-drive-card past-drive-card" onclick="window.location='locations.html?tab=past'" style="cursor:pointer">
+      <div class="adc-top">
+        <span class="adc-badge adc-badge-past">Completed</span>
+        <span class="adc-resource">📚 Books</span>
+      </div>
+      <div class="adc-qty">629 Books</div>
+      <h4 class="adc-school">Queens City Academy Charter School</h4>
+      <div class="adc-location">📍 Plainfield, NJ</div>
+      <p class="adc-desc">Our first book drive — 629 books delivered to Queens City Academy Charter School, putting stories in the hands of young readers.</p>
+      <span class="adc-link">View drive details →</span>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-brand">The Giving Collective</div>
+  <div>© 2026 The Giving Collective · All rights reserved · Student-Run 501(c)(3) Nonprofit</div>
+  <div><a href="mailto:thegivingcollective.tgc@gmail.com">thegivingcollective.tgc@gmail.com</a></div>
+</footer>
+
+</body>
+</html>

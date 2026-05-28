@@ -174,6 +174,7 @@
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="impact.html">Impact</a></li>
+    <li><a href="drives.html">All Drives</a></li>
     <li><a href="team.html">Team</a></li>
     <li><a href="volunteer.html">Volunteer</a></li>
     <li><a href="locations.html" class="nav-active">Drop-off</a></li>
@@ -532,10 +533,30 @@ function showTab(tab, btn) {
 }
 
 // ── Init ───────────────────────────────────────────────────────────────────────
-loadActiveMap();
-renderList();
-// Auto-request location silently on load
-requestLocation(false);
+// Support deep-linking from drives.html via ?tab=past&drive=paterson
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const tab = params.get('tab');
+  const driveId = params.get('drive');
+
+  if (tab === 'past') {
+    currentTab = 'past';
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('[onclick*="past"]').classList.add('active');
+    if (driveId) {
+      const drive = drives.find(d => d.id === driveId);
+      if (drive) {
+        focusedDrive = drive;
+        setTimeout(() => loadPastMap(drive), 100);
+      }
+    }
+    renderList();
+  } else {
+    loadActiveMap();
+    renderList();
+  }
+  requestLocation(false);
+})();
 </script>
 </body>
 </html>
