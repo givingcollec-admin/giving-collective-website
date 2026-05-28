@@ -254,6 +254,7 @@ const drives = [
     id: 'linden',
     name: 'Linden Middle School',
     resource: 'Books',
+    detailsLink: 'drives.html#linden',
     status: 'active',
     locations: [
       { name: 'Montville Township Library', address: '90 Horseneck Rd, Montville, NJ 07045', lat: 40.8888, lng: -74.3708 }
@@ -263,6 +264,7 @@ const drives = [
     id: 'paterson',
     name: 'Paterson Public School',
     resource: 'Winter Clothing',
+    detailsLink: 'drives.html#paterson',
     status: 'past',
     locations: [
       { name: 'Robert R. Lazar Middle School', address: '123 Changebridge Rd, Montville, NJ 07045', lat: 40.8817, lng: -74.3674 },
@@ -490,7 +492,8 @@ function renderList() {
         </span>
       </div>
       <div class="drive-meta">${drive.locations.length} drop-off location${drive.locations.length !== 1 ? 's' : ''} &nbsp;·&nbsp; ${drive.resource}</div>
-      ${locItems}`;
+      ${locItems}
+      <a href="${drive.detailsLink}" onclick="event.stopPropagation()" style="display:inline-block;margin-top:0.6rem;font-size:0.75rem;font-weight:600;color:var(--green);text-decoration:none">More details →</a>`;
     list.appendChild(card);
   });
 }
