@@ -642,8 +642,7 @@ footer a:hover{color:var(--accent-green)}
   transition:box-shadow 0.2s,border-color 0.2s;
 }
 .all-drive-card:hover{box-shadow:var(--shadow);border-color:var(--green)}
-.active-drive-card{border-color:var(--accent-green);background:var(--accent-green-pale)}
-.active-drive-card:hover{border-color:var(--accent-green)}
+.active-drive-card{border-color:var(--border);background:#fff}
 .adc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
 .adc-badge{font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:100px}
 .adc-badge-active{background:var(--accent-green-pale);color:var(--accent-green);border:1px solid rgba(45,157,92,0.3)}
