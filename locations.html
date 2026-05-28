@@ -425,13 +425,25 @@ function renderList() {
     const isFocused = focusedDrive?.id === drive.id;
     card.className = 'drive-card' + (isFocused ? ' selected' : '');
     card.onclick = () => {
-      focusedDrive = drive;
-      if (isActive) {
-        // Zoom map to this drive's locations
-        const driveBounds = drive.locations.map(l => [l.lat, l.lng]);
-        if (map && driveBounds.length) map.fitBounds(driveBounds, { padding: [60, 60] });
+      if (focusedDrive?.id === drive.id) {
+        // Collapse — retract locations
+        focusedDrive = null;
+        if (!isActive) {
+          markerData.forEach(md => map && map.removeLayer(md.marker));
+          markerData = [];
+          document.getElementById('map-placeholder').style.display = 'flex';
+          document.getElementById('map').style.display = 'none';
+          document.getElementById('map-title').textContent = 'Select a drive to see locations';
+        }
       } else {
-        loadPastMap(drive);
+        // Expand — show locations
+        focusedDrive = drive;
+        if (isActive) {
+          const driveBounds = drive.locations.map(l => [l.lat, l.lng]);
+          if (map && driveBounds.length) map.fitBounds(driveBounds, { padding: [60, 60] });
+        } else {
+          loadPastMap(drive);
+        }
       }
       renderList();
     };
@@ -446,7 +458,7 @@ function renderList() {
     });
     if (userLat !== null) locs.sort((a, b) => a.dist - b.dist);
 
-    const showLocs = isActive || isFocused;
+    const showLocs = isFocused;
 
     const locItems = showLocs ? `
       <div class="location-list">
