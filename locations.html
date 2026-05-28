@@ -196,10 +196,10 @@
   <div class="drives-panel">
     <div class="tab-row">
       <button class="tab-btn active" onclick="showTab('active', this)">
-        Active <span class="count">1</span>
+        Active <span class="count" id="count-active"></span>
       </button>
       <button class="tab-btn" onclick="showTab('past', this)">
-        Past Drives <span class="count">1</span>
+        Past Drives <span class="count" id="count-past"></span>
       </button>
     </div>
 
@@ -260,7 +260,7 @@ const drives = [
   },
   {
     id: 'paterson',
-    name: 'Paterson Public School',
+    name: 'Paterson Public School No. 6',
     resource: 'Winter Clothing',
     detailsLink: 'drives.html#paterson',
     status: 'past',
@@ -275,6 +275,70 @@ const drives = [
       { name: 'Fairfield Hand Wash & Detail Center', address: '1275 Bloomfield Ave #67, Fairfield, NJ 07004', lat: 40.8800, lng: -74.2980 },
       { name: "Joe's Pizza", address: '185 Changebridge Rd, Montville, NJ 07045', lat: 40.8793, lng: -74.3668 }
     ]
+  },
+  {
+    id: 'barnabas',
+    name: 'Barnabas Health Center',
+    resource: 'Books',
+    detailsLink: 'drives.html#barnabas',
+    status: 'past',
+    locations: []
+  },
+  {
+    id: 'qcacs-1250',
+    name: 'Queens City Academy Charter School (1,250 Books)',
+    resource: 'Books',
+    detailsLink: 'drives.html#qcacs-1250',
+    status: 'past',
+    locations: []
+  },
+  {
+    id: 'qcacs-420',
+    name: 'Queens City Academy Charter School (420 Books)',
+    resource: 'Books',
+    detailsLink: 'drives.html#qcacs-420',
+    status: 'past',
+    locations: []
+  },
+  {
+    id: 'qcacs-629',
+    name: 'Queens City Academy Charter School (629 Books)',
+    resource: 'Books',
+    detailsLink: 'drives.html#qcacs-629',
+    status: 'past',
+    locations: []
+  },
+  {
+    id: 'ship',
+    name: 'SHIP Food Center',
+    resource: 'Food',
+    detailsLink: 'drives.html#ship',
+    status: 'past',
+    locations: []
+  },
+  {
+    id: 'park',
+    name: 'Park Elementary School',
+    resource: 'LEGO Sets',
+    detailsLink: 'drives.html#park',
+    status: 'past',
+    locations: []
+  },
+  {
+    id: 'essex',
+    name: 'Essex Valley School',
+    resource: 'Clothing',
+    detailsLink: 'drives.html#essex',
+    status: 'past',
+    locations: []
+  },
+  {
+    id: 'sotomayor',
+    name: 'Sonia Sotomayor School No. 21',
+    resource: 'Winter Clothing',
+    detailsLink: 'drives.html#sotomayor',
+    status: 'past',
+    locations: []
   }
 ];
 
@@ -550,6 +614,9 @@ function showTab(tab, btn) {
 // ── Init ───────────────────────────────────────────────────────────────────────
 // Support deep-linking from drives.html via ?tab=past&drive=paterson
 (function() {
+  // Dynamic tab counts
+  document.getElementById('count-active').textContent = drives.filter(d => d.status === 'active').length;
+  document.getElementById('count-past').textContent   = drives.filter(d => d.status === 'past').length;
   const params = new URLSearchParams(window.location.search);
   const tab = params.get('tab');
   const driveId = params.get('drive');
