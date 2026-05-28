@@ -58,7 +58,7 @@ p{line-height:1.75}
   border-left:1px solid var(--border);
 }
 .carousel-logo-panel .brand-logo{
-  width:clamp(80px,10vw,130px);height:auto;
+  width:clamp(100px,12vw,160px);height:auto;display:block;margin:0 auto;
 }
 .brand-wordmark{
   font-family:'Fraunces',serif;
