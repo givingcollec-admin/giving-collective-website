@@ -253,6 +253,7 @@ const drives = [
   {
     id: 'linden',
     name: 'Linden Middle School',
+    resource: 'Books',
     status: 'active',
     locations: [
       { name: 'Montville Township Library', address: '90 Horseneck Rd, Montville, NJ 07045', lat: 40.8888, lng: -74.3708 }
@@ -261,6 +262,7 @@ const drives = [
   {
     id: 'paterson',
     name: 'Paterson Public School',
+    resource: 'Winter Clothing',
     status: 'past',
     locations: [
       { name: 'Robert R. Lazar Middle School', address: '123 Changebridge Rd, Montville, NJ 07045', lat: 40.8817, lng: -74.3674 },
@@ -487,7 +489,7 @@ function renderList() {
           ${isActive ? 'Active' : 'Past'}
         </span>
       </div>
-      <div class="drive-meta">${drive.locations.length} drop-off location${drive.locations.length !== 1 ? 's' : ''}</div>
+      <div class="drive-meta">${drive.locations.length} drop-off location${drive.locations.length !== 1 ? 's' : ''} &nbsp;·&nbsp; ${drive.resource}</div>
       ${locItems}`;
     list.appendChild(card);
   });
