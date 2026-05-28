@@ -533,16 +533,14 @@ function submitEmail() {
   sections.forEach(s => spyObs.observe(s));
 })();
 
-// 4. Ticker — duplicate items for seamless loop
+// 4. Ticker — duplicate items enough to fill screen with no white space
 (function() {
   const track = document.getElementById('tickerTrack');
   if (!track) return;
-  // Only duplicate if there are real logos (not just the placeholder)
-  const items = track.querySelectorAll('.ticker-item');
-  if (items.length > 1 || !track.querySelector('.ticker-placeholder')) {
-    const clone = track.innerHTML;
-    track.innerHTML += clone; // duplicate for seamless scroll
-  }
+  if (track.querySelector('.ticker-placeholder')) return;
+  // Repeat 4 copies total so the track is always wider than any viewport
+  const original = track.innerHTML;
+  track.innerHTML = original + original + original + original;
 })();
 
 // 5. Button ripple on click
