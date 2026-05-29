@@ -560,16 +560,12 @@ function submitEmail() {
 })();
 
 // ── Newsletter popup ─────────────────────────────────────────────────────────
-(function() {
-  if (localStorage.getItem('nl_dismissed')) return;
-  setTimeout(() => {
-    document.getElementById('newsletterOverlay').classList.add('nl-visible');
-  }, 1200);
-})();
+setTimeout(() => {
+  document.getElementById('newsletterOverlay').classList.add('nl-visible');
+}, 1200);
 
 function closeNewsletter() {
   document.getElementById('newsletterOverlay').classList.remove('nl-visible');
-  localStorage.setItem('nl_dismissed', '1');
 }
 
 function submitPopupEmail() {
