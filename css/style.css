@@ -478,6 +478,55 @@ section{padding:6rem 5vw}
 .join-contact{font-size:0.82rem;color:rgba(255,255,255,0.6)}
 .join-contact a{color:var(--gold-light);text-decoration:none}
 
+/* ===== NEWSLETTER POPUP ===== */
+.nl-overlay{
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(13,27,42,0.6);
+  backdrop-filter:blur(4px);
+  display:flex;align-items:center;justify-content:center;
+  padding:1rem;
+  opacity:0;visibility:hidden;
+  transition:opacity 0.35s,visibility 0.35s;
+}
+.nl-overlay.nl-visible{opacity:1;visibility:visible}
+.nl-modal{
+  background:var(--green);color:#fff;
+  border-radius:20px;
+  max-width:520px;width:100%;
+  padding:3rem 2.5rem 2.5rem;
+  text-align:center;
+  position:relative;
+  box-shadow:0 24px 60px rgba(0,0,0,0.35);
+  transform:translateY(24px) scale(0.97);
+  transition:transform 0.35s cubic-bezier(.22,.68,0,1.2);
+}
+.nl-overlay.nl-visible .nl-modal{transform:translateY(0) scale(1)}
+.nl-close{
+  position:absolute;top:1rem;right:1.1rem;
+  background:none;border:none;cursor:pointer;
+  color:rgba(255,255,255,0.6);font-size:1.6rem;line-height:1;
+  transition:color 0.2s;
+}
+.nl-close:hover{color:#fff}
+.nl-badge{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--gold-light);margin-bottom:1rem;
+}
+.nl-badge::before{content:'';display:inline-block;width:24px;height:2px;background:var(--gold-light);border-radius:2px}
+.nl-badge::after{content:'';display:inline-block;width:24px;height:2px;background:var(--gold-light);border-radius:2px}
+.nl-title{color:#fff;font-size:clamp(1.6rem,4vw,2.2rem);margin-bottom:0.75rem}
+.nl-desc{color:rgba(255,255,255,0.75);font-size:1rem;margin-bottom:2rem}
+.nl-form{margin-bottom:0.75rem}
+.nl-msg{font-size:0.85rem;min-height:1.2em;margin-bottom:1rem}
+.nl-skip{
+  background:none;border:none;cursor:pointer;
+  color:rgba(255,255,255,0.45);font-size:0.82rem;
+  font-family:'Figtree',sans-serif;
+  transition:color 0.2s;text-decoration:underline;
+}
+.nl-skip:hover{color:rgba(255,255,255,0.75)}
+
 /* ===== FOOTER ===== */
 footer{
   background:var(--ink);color:rgba(255,255,255,0.55);

@@ -11,6 +11,22 @@
 </head>
 <body>
 
+<!-- NEWSLETTER POPUP -->
+<div id="newsletterOverlay" class="nl-overlay" aria-modal="true" role="dialog" aria-label="Newsletter signup">
+  <div class="nl-modal">
+    <button class="nl-close" onclick="closeNewsletter()" aria-label="Close">&times;</button>
+    <div class="nl-badge">Join Us</div>
+    <h2 class="nl-title">Stay in the loop</h2>
+    <p class="nl-desc">Get updates on our latest drives, partnerships, and ways to make a difference in your community.</p>
+    <div class="email-form nl-form">
+      <input type="email" id="popupEmail" placeholder="Your email address">
+      <button type="button" id="popupBtn" onclick="submitPopupEmail()">Sign Up</button>
+    </div>
+    <p id="popupMsg" class="nl-msg"></p>
+    <button class="nl-skip" onclick="closeNewsletter()">No thanks</button>
+  </div>
+</div>
+
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-brand">
@@ -542,6 +558,58 @@ function submitEmail() {
   const original = track.innerHTML;
   track.innerHTML = original + original + original + original;
 })();
+
+// ── Newsletter popup ─────────────────────────────────────────────────────────
+(function() {
+  if (localStorage.getItem('nl_dismissed')) return;
+  setTimeout(() => {
+    document.getElementById('newsletterOverlay').classList.add('nl-visible');
+  }, 1200);
+})();
+
+function closeNewsletter() {
+  document.getElementById('newsletterOverlay').classList.remove('nl-visible');
+  localStorage.setItem('nl_dismissed', '1');
+}
+
+function submitPopupEmail() {
+  const input = document.getElementById('popupEmail');
+  const btn   = document.getElementById('popupBtn');
+  const msg   = document.getElementById('popupMsg');
+  const email = input.value.trim();
+
+  if (!email || !email.includes('@')) {
+    msg.style.color = 'rgba(255,200,200,0.9)';
+    msg.textContent = 'Please enter a valid email address.';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  fetch('https://script.google.com/macros/s/AKfycbzZWx6zV_8x3pt9hVUFTaHisAx86Ropl083fMy0_bCJsQEbIG45mA_6uaD2OxRTAHM/exec', {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: 'email=' + encodeURIComponent(email)
+  }).then(() => {
+    msg.style.color = 'rgba(255,255,255,0.85)';
+    msg.textContent = 'You\'re in! We\'ll keep you posted.';
+    input.value = '';
+    btn.textContent = 'Done';
+    setTimeout(closeNewsletter, 2000);
+  }).catch(() => {
+    msg.style.color = 'rgba(255,200,200,0.9)';
+    msg.textContent = 'Something went wrong — please try again.';
+    btn.disabled = false;
+    btn.textContent = 'Sign Up';
+  });
+}
+
+// Close on overlay click
+document.getElementById('newsletterOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeNewsletter();
+});
 
 // 5. Button ripple on click
 (function() {
