@@ -46,21 +46,131 @@ body.dark-mode{
   background:#0f1923;
   color:#e8edf2;
 }
+/* ── Dark mode element overrides ── */
 body.dark-mode nav{background:var(--surface-nav)}
+body.dark-mode .nav-toggle span{background:#e8edf2}
+
+/* Carousel & brand */
 body.dark-mode .carousel-logo-panel,
-body.dark-mode .brand-intro{background:#1a2636;border-color:var(--border)}
+body.dark-mode .brand-intro,
+body.dark-mode .ticker-wrap{background:#1a2636;border-color:var(--border)}
+body.dark-mode .ticker-item img{filter:grayscale(0%);opacity:0.7}
+body.dark-mode .brand-wordmark{color:#e8edf2}
+body.dark-mode .brand-tagline{color:#7a8c9a}
+body.dark-mode .carousel-wrap{background:#111d2b}
+
+/* Hero */
+body.dark-mode .hero{background:#0f1923}
 body.dark-mode .hero::before{opacity:0.04}
+body.dark-mode .hero-badge{background:#1a2f47;color:#7eb3e8;border-color:rgba(91,155,213,0.2)}
+body.dark-mode .hero-float-card{background:#1a2636;border-color:var(--border);color:#e8edf2}
+body.dark-mode .float-label{color:#7a8c9a}
+body.dark-mode .float-num{color:#e8edf2}
+body.dark-mode .float-sub{color:#7a8c9a}
+body.dark-mode .stat-label{color:#7a8c9a}
+body.dark-mode .stat-num{color:#5b9bd5}
+body.dark-mode .hero-photo-grid img{opacity:0.85}
+
+/* Story */
+body.dark-mode .story{background:#0f1923}
+body.dark-mode .story-text p{color:#b0bec8}
+body.dark-mode .story-text .lead{color:#c8d6e2}
+body.dark-mode .story-photos img{opacity:0.85}
+
+/* Mission */
 body.dark-mode .mission{background:#131e2d}
-body.dark-mode .mission-big-word{color:rgba(91,155,213,0.06)}
+body.dark-mode .mission-big-word{color:rgba(91,155,213,0.05)}
+body.dark-mode .mission-body{color:#b0bec8}
+body.dark-mode .mission-source a{color:#7a8c9a}
+
+/* Pillars & cards */
 body.dark-mode .pillar,
 body.dark-mode .impact-card,
-body.dark-mode .testi-slide,
+body.dark-mode .vision-card,
+body.dark-mode .team-card,
+body.dark-mode .vol-reason,
+body.dark-mode .donate-card,
+body.dark-mode .location-card,
+body.dark-mode .drive-card,
+body.dark-mode .loc-item,
 body.dark-mode .all-drive-card,
+body.dark-mode .testi-slide,
 body.dark-mode .nl-modal,
 body.dark-mode .join-box{background:#1a2636;border-color:var(--border)}
-body.dark-mode footer{background:#0a1118;border-color:var(--border)}
-body.dark-mode input,body.dark-mode textarea,body.dark-mode select{background:#1a2636;color:#e8edf2;border-color:var(--border)}
-body.dark-mode .nav-toggle span{background:#e8edf2}
+body.dark-mode .pillar p,
+body.dark-mode .vision-card p,
+body.dark-mode .team-card p,
+body.dark-mode .vol-reason p,
+body.dark-mode .donate-card p,
+body.dark-mode .adc-desc{color:#b0bec8}
+body.dark-mode .pillar-icon{filter:brightness(1.1)}
+
+/* Impact section */
+body.dark-mode .impact{background:#131e2d}
+body.dark-mode .impact-label{color:#7a8c9a}
+body.dark-mode .impact-num{color:#5b9bd5}
+
+/* Gallery */
+body.dark-mode .gallery-grid img{opacity:0.8}
+
+/* Testimonials */
+body.dark-mode .testimonials{background:#0f1923}
+body.dark-mode blockquote{color:#c8d6e2}
+body.dark-mode .testi-author{color:#7a8c9a}
+body.dark-mode .testi-slide-img img{opacity:0.8}
+
+/* Join / newsletter */
+body.dark-mode .join{background:#131e2d}
+body.dark-mode .join-box{background:#1a2636}
+body.dark-mode .email-form input{background:#0f1923;color:#e8edf2;border-color:var(--border)}
+body.dark-mode .email-form input::placeholder{color:#5a6a7a}
+
+/* Page header */
+body.dark-mode .page-header{background:#131e2d;border-color:var(--border)}
+body.dark-mode .page-header p{color:#7a8c9a}
+
+/* Inner page content */
+body.dark-mode .page-content p{color:#b0bec8}
+body.dark-mode .page-content strong{color:#e8edf2}
+body.dark-mode .two-col img{opacity:0.85}
+body.dark-mode .section-divider{border-color:var(--border)}
+
+/* Contact */
+body.dark-mode .contact-info{background:#1a3a5c}
+body.dark-mode .form-group label{color:#c8d6e2}
+body.dark-mode .form-group input,
+body.dark-mode .form-group textarea{background:#1a2636;color:#e8edf2;border-color:var(--border)}
+body.dark-mode .form-group input:focus,
+body.dark-mode .form-group textarea:focus{border-color:#5b9bd5}
+body.dark-mode .form-group input::placeholder,
+body.dark-mode .form-group textarea::placeholder{color:#5a6a7a}
+
+/* Schools / misc tables */
+body.dark-mode table{color:#b0bec8}
+body.dark-mode th{background:#1a2636;color:#e8edf2;border-color:var(--border)}
+body.dark-mode td{border-color:var(--border)}
+body.dark-mode tr:nth-child(even){background:#162030}
+
+/* Drives / locations */
+body.dark-mode .tab-btn{background:#1a2636;color:#7a8c9a;border-color:var(--border)}
+body.dark-mode .tab-btn.active{background:#5b9bd5;color:#fff;border-color:#5b9bd5}
+body.dark-mode .map-toolbar{background:#1a2636;border-color:var(--border)}
+body.dark-mode .map-wrap{border-color:var(--border)}
+body.dark-mode .partner-cta{background:#131e2d;border-color:var(--border)}
+body.dark-mode .partner-cta p{color:#7a8c9a}
+body.dark-mode .locate-btn{background:#1a2f47;color:#5b9bd5;border-color:rgba(91,155,213,0.2)}
+
+/* Footer */
+body.dark-mode footer{background:#0a1118;border-color:var(--border);color:#5a6a7a}
+body.dark-mode .footer-brand{color:rgba(255,255,255,0.7)}
+
+/* Inputs globally */
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select{background:#1a2636;color:#e8edf2;border-color:var(--border)}
+
+/* Section labels */
+body.dark-mode .section-label{color:#5b9bd5}
 
 /* Dark mode toggle button */
 .dark-toggle{
