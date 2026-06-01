@@ -50,6 +50,17 @@ body.dark-mode{
 body.dark-mode nav{background:var(--surface-nav)}
 body.dark-mode .nav-toggle span{background:#e8edf2}
 
+/* Logo background pill in dark mode */
+body.dark-mode .nav-brand img{
+  background:#fff;
+  border-radius:6px;
+  padding:3px 6px;
+}
+
+/* Hero text visibility */
+body.dark-mode .hero-sub{color:#d4dfe8}
+body.dark-mode h1,body.dark-mode h2,body.dark-mode h3{color:#e8edf2}
+
 /* Carousel & brand */
 body.dark-mode .carousel-logo-panel,
 body.dark-mode .brand-intro,
