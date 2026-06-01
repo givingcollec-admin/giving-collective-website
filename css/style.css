@@ -20,7 +20,63 @@
   --radius-lg:20px;
   --shadow:0 2px 20px rgba(13,27,42,0.07);
   --shadow-lg:0 8px 48px rgba(13,27,42,0.12);
+  /* surface tokens (overridden in dark mode) */
+  --surface:#fafaf8;
+  --surface-card:#ffffff;
+  --surface-nav:rgba(250,250,248,0.94);
 }
+
+/* ===== DARK MODE ===== */
+body.dark-mode{
+  --off-white:#0f1923;
+  --white:#1a2636;
+  --surface:#0f1923;
+  --surface-card:#1a2636;
+  --surface-nav:rgba(15,25,35,0.95);
+  --ink:#e8edf2;
+  --ink-mid:#b0bec8;
+  --ink-muted:#7a8c9a;
+  --border:rgba(100,160,230,0.12);
+  --green:#5b9bd5;
+  --green-mid:#4a8ac4;
+  --green-pale:#1a2e45;
+  --green-xpale:#131e2d;
+  --shadow:0 2px 20px rgba(0,0,0,0.3);
+  --shadow-lg:0 8px 48px rgba(0,0,0,0.45);
+  background:#0f1923;
+  color:#e8edf2;
+}
+body.dark-mode nav{background:var(--surface-nav)}
+body.dark-mode .carousel-logo-panel,
+body.dark-mode .brand-intro{background:#1a2636;border-color:var(--border)}
+body.dark-mode .hero::before{opacity:0.04}
+body.dark-mode .mission{background:#131e2d}
+body.dark-mode .mission-big-word{color:rgba(91,155,213,0.06)}
+body.dark-mode .pillar,
+body.dark-mode .impact-card,
+body.dark-mode .testi-slide,
+body.dark-mode .all-drive-card,
+body.dark-mode .nl-modal,
+body.dark-mode .join-box{background:#1a2636;border-color:var(--border)}
+body.dark-mode footer{background:#0a1118;border-color:var(--border)}
+body.dark-mode input,body.dark-mode textarea,body.dark-mode select{background:#1a2636;color:#e8edf2;border-color:var(--border)}
+body.dark-mode .nav-toggle span{background:#e8edf2}
+
+/* Dark mode toggle button */
+.dark-toggle{
+  background:none;border:1.5px solid var(--border);
+  border-radius:100px;
+  padding:0.3rem 0.65rem;
+  cursor:pointer;
+  font-size:1rem;
+  color:var(--ink-mid);
+  display:flex;align-items:center;gap:0.35rem;
+  transition:border-color 0.2s,background 0.2s;
+  line-height:1;
+}
+.dark-toggle:hover{border-color:var(--green);background:var(--green-pale)}
+body.dark-mode .dark-toggle{border-color:var(--border);color:var(--ink-mid)}
+body.dark-mode .dark-toggle:hover{background:var(--green-pale)}
 html{scroll-behavior:smooth;font-size:16px}
 body{font-family:'Figtree',sans-serif;background:var(--off-white);color:var(--ink);overflow-x:hidden;line-height:1.6}
 
