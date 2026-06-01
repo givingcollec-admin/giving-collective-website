@@ -56,11 +56,9 @@ body.dark-mode .btn-dark:hover{background:#4a8ac4}
 body.dark-mode .btn-ghost{color:#e8edf2;border-color:#e8edf2}
 body.dark-mode .btn-ghost:hover{background:#e8edf2;color:#0f1923}
 
-/* Logo background pill in dark mode */
+/* Logo in dark mode — brighten instead of white pill */
 body.dark-mode .nav-brand img{
-  background:#fff;
-  border-radius:6px;
-  padding:3px 6px;
+  filter: brightness(0) invert(1);
 }
 
 /* Hero text visibility */
