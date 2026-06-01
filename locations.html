@@ -93,7 +93,7 @@
     .loc-item.highlighted { background: var(--green-pale); border-color: var(--green); }
     .loc-pin {
       width: 22px; height: 22px; border-radius: 50%;
-      background: var(--green); color: #fff;
+      background: var(--ink); color: #fff;
       font-size: 0.65rem; font-weight: 700;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0; margin-top: 1px;
@@ -259,7 +259,7 @@
 const drives = [
   {
     id: 'linden',
-    name: 'Joseph E. Soehl Middle School',
+    name: 'Joseph E. Soehl Middle School — Book Drive (6–8)',
     resource: 'Books',
     detailsLink: 'drives.html#linden',
     status: 'active',
@@ -545,9 +545,9 @@ function buildCard(drive) {
         return `
         <div class="loc-item${isClosest ? ' highlighted' : ''}"
              onclick="event.stopPropagation();focusMarker('${drive.id}',${loc.idx})">
-          <div class="loc-pin" style="${isClosest ? 'background:#f4c842;color:#111' : ''}">${loc.num}</div>
+          <div class="loc-pin">${loc.num}</div>
           <div class="loc-info">
-            <div class="loc-name">${loc.name}${isClosest ? '<span style="font-size:0.65rem;font-weight:700;color:#b5830a;margin-left:4px">★ Closest</span>' : ''}</div>
+            <div class="loc-name">Drop-Off Location${isClosest ? '<span style="font-size:0.65rem;font-weight:700;color:#b5830a;margin-left:4px">★ Closest</span>' : ''}</div>
             <div class="loc-addr">${loc.address}</div>
           </div>
           ${loc.dist !== null ? `<div class="loc-dist">${fmtDist(loc.dist)}</div>` : ''}
