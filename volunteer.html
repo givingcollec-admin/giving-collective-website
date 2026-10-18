@@ -16,6 +16,30 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,700&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .us-map{margin:0 0 3rem;display:flex;align-items:center;gap:2rem}
+    .us-map-stat{flex:0 0 220px}
+    .us-map-num{font-family:'Fraunces',serif;font-size:5rem;font-weight:900;line-height:1;color:var(--green)}
+    .us-map-label{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;color:var(--ink);margin-top:0.25rem}
+    .us-map-stat p{font-size:0.9rem;color:var(--ink-muted);margin:0.5rem 0 0}
+    .us-map img{flex:1;min-width:0;width:100%;max-width:720px;height:auto;display:block}
+    body.dark-mode .us-map img{filter:brightness(0.55)}
+
+    .form-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin:2.5rem 0 1rem}
+    .form-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.75rem;display:flex;flex-direction:column;align-items:flex-start;gap:0.5rem}
+    body.dark-mode .form-card{background:var(--green-xpale)}
+    .form-card h3{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--ink);margin:0}
+    .form-card p{font-size:0.9rem;color:var(--ink-muted);margin:0 0 0.75rem}
+    .form-card .btn-green{margin-bottom:0.25rem}
+    .form-card .checklist-link{font-size:0.9rem;font-weight:600;color:var(--green);text-decoration:none}
+    .form-card .checklist-link:hover{text-decoration:underline}
+
+    @media(max-width:700px){
+      .us-map{flex-direction:column;align-items:flex-start;gap:1rem}
+      .us-map-stat{flex:none}
+      .form-cards{grid-template-columns:1fr}
+    }
+  </style>
 </head>
 <body>
 
@@ -106,12 +130,16 @@
     </div>
   </div>
 
-  <div class="form-btns">
-    <div class="form-option">
+  <div class="form-cards">
+    <div class="form-card">
+      <h3>Start a Chapter</h3>
+      <p>Bring Giving Collective to your community.</p>
       <a href="https://forms.gle/D5cp5YnRLoyy4jqPA" class="btn-green" target="_blank" rel="noopener">Start a Chapter</a>
       <a href="https://docs.google.com/document/d/1-kpNF486aRA8QcGeXlzztAeu-B7IzDCxtULPP-nEggc/edit?usp=sharing" class="checklist-link" target="_blank" rel="noopener">Starting a chapter checklist →</a>
     </div>
-    <div class="form-option">
+    <div class="form-card">
+      <h3>Join a Chapter</h3>
+      <p>Team up with an existing chapter near you.</p>
       <a href="https://forms.gle/stbUSXV5iFmMzAxQ6" class="btn-green" target="_blank" rel="noopener">Join a Chapter</a>
       <a href="https://docs.google.com/document/d/1qnbwjm1bg6rTYpMedRMGXVN9m4a99uaWhc5cmvbf5vM/edit?usp=sharing" class="checklist-link" target="_blank" rel="noopener">Joining a chapter checklist →</a>
     </div>
