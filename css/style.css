@@ -838,6 +838,10 @@ footer a:hover{color:var(--accent-green)}
 .vol-reason{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem}
 .vol-reason h4{font-family:'Fraunces',serif;color:var(--green);margin-bottom:0.5rem;font-size:1rem}
 .vol-reason p{font-size:0.875rem;color:var(--ink-muted)}
+.us-map{margin:0 0 3rem;text-align:center}
+.us-map img{width:100%;max-width:720px;height:auto;display:block;margin:0 auto}
+.us-map figcaption{margin-top:0.75rem;font-size:0.85rem;color:var(--ink-muted)}
+body.dark-mode .us-map img{filter:brightness(0.55)}
 .steps{counter-reset:step;margin:1.5rem 0}
 .step-item{display:flex;gap:1rem;margin-bottom:1.5rem;align-items:flex-start}
 .step-num{
